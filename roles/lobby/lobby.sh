@@ -58,8 +58,8 @@ fi
 
 
 function installLobby() {
-  local destFolder={$1-}
-  local tagName={$2-}
+  local destFolder=$1
+  local tagName=$2
 
   mkdir -p ${destFolder}
   echo "$tagName" > ${destFolder}/version
@@ -80,7 +80,7 @@ function installLobby() {
 ## TODO: update database port + password
  ## todo: add lobby database port to props (do it outside of this method in case we are changing port)
 function updateConfig() {
-  local destFolder={$1-}
+  local destFolder=$1
 
   local serviceFileDeployedPath="/lib/systemd/system/triplea-lobby.service"
   cp ${LOBBY_SERVICE_FILE} > ${serviceFileDeployedPath}
