@@ -1,5 +1,7 @@
 # Infrastructure
 
+## First time setup
+
 ```
 bash <(curl -s "https://raw.githubusercontent.com/DanVanAtta/infrastructure/master/first_time_setup.sh")
 crontab -l | { cat; echo "*/1 * * * * git -C /root/infrastructure/ pull --rebase origin master > /dev/null; /root/infrastructure/root/root_cron.sh"; } | crontab -
@@ -25,6 +27,12 @@ Verify:
 ```
  ssh-keygen -o -a 100 -t ed25519 -C [user]@[machine]
  eg: ssh-keygen -o -a 100 -t ed25519 -C joe@alien-laptop
+```
+
+## Test and Manual Trigger
+SSH to the machine and run the cron by hand:
+```
+/root/infrastructure/root/root_cron.sh
 ```
 
 
