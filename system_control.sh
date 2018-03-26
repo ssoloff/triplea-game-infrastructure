@@ -43,7 +43,7 @@ function systemInstall() {
 
 ## set up an exit trap to make sure we remove the touch file on exit.
 function removeTouchFile() {
-  rm /root/CONTROL_FILE_NAME
+  rm -f /root/CONTROL_FILE_NAME
 }
 trap 'removeTouchFile' EXIT
 
