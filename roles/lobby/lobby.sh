@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. /root/infrastructure/common.sh
+
 CURL="curl -L"
 RUN_LOBBY="/root/infrastructure/roles/lobby/files/run_lobby.sh"
 REMOVE_LOBBY="/root/infrastructure/roles/lobby/files/remove_lobby.sh"
