@@ -83,7 +83,7 @@ function updateConfig() {
   local destFolder=$1
 
   local serviceFileDeployedPath="/lib/systemd/system/triplea-lobby.service"
-  cp ${LOBBY_SERVICE_FILE} ${serviceFileDeployedPath}
+  cp -v ${LOBBY_SERVICE_FILE} ${serviceFileDeployedPath}
   sed -i "s|LOBBY_DIR|${destFolder}|" ${serviceFileDeployedPath}
   systemctl enable triplea-lobby
   systemctl daemon-reload
