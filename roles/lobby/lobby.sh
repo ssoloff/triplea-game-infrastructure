@@ -10,6 +10,9 @@ REMOVE_LOBBY="/root/infrastructure/roles/lobby/files/remove_lobby.sh"
 LOBBY_SERVICE_FILE="/root/infrastructure/roles/lobby/files/triplea-lobby.service"
 POSITIONAL=()
 
+TAG_NAME=
+PORT=
+DATABASE_PORT
 
 while [[ $# -gt 0 ]]; do
   key="$1"
