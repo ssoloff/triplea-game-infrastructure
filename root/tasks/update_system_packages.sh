@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. /root/infrastructure/common.sh
+
+apt-get -y install \
+  curl \
+  fail2ban \
+  htop \
+  iftop \
+  openjdk-8-jre \
+  openjfx \
+  postgresql \
+  postgresql-contrib \
+  python3 \
+  tiptop \
+  unattended-upgrades \
+  unzip \
+  vim
