@@ -48,7 +48,7 @@ echo "Lobby port: ${PORT}"
 echo "Lobby database port: ${DATABASE_PORT}"
 echo "Lobby version tag: ${TAG_NAME}"
 
-set -eux
+set -ex
 
 # Retrieve latest triplea version
 if [[ "${TAG_NAME}" == "latest" ]]; then
