@@ -9,7 +9,7 @@ POSITIONAL=()
 while [[ $# -gt 0 ]]; do
   key="$1"
 
-  case $key in
+  case ${key} in
     -p|--port)
     PORT="$2"
     shift # past argument
@@ -19,12 +19,11 @@ while [[ $# -gt 0 ]]; do
     DATABASE_PORT="$2"
     shift # past argument
     shift # past value
+    ;;
    --tag-name)
     TAG_NAME="$2"
     shift # past argument
     shift # past value
-    ;;
-
     ;;
     *)    # unknown option
     POSITIONAL+=("$1") # save it in an array for later
