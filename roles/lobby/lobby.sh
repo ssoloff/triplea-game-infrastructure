@@ -87,7 +87,7 @@ function updateConfig() {
 }
 
 
-DESTINATION_FOLDER=${DESTINATION_FOLDER}/${TAG_NAME}
+DESTINATION_FOLDER=/home/triplea/lobby/${TAG_NAME}
 if [ ! -d "${DESTINATION_FOLDER}" ]; then
  report "Lobby ${TAG_NAME} update started"
  installLobby ${DESTINATION_FOLDER} ${TAG_NAME}
