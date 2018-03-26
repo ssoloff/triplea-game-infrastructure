@@ -34,6 +34,8 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 
+## TODO: arg check, if any are missing then report an error
+
 echo "Lobby port: ${PORT}"
 echo "Lobby database port: ${DATABASE_PORT}"
 echo "Lobby version tag: ${TAG_NAME}"
