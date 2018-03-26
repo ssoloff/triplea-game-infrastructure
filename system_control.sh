@@ -29,11 +29,11 @@ function systemInstall() {
 function removeTouchFile() {
   rm -f /root/${CONTROL_FILE_NAME}
 }
-trap 'removeTouchFile' EXIT
 
 if [ -z "$CONTROL_FILE" ]; then
   MY_PID=$$
   echo "${MY_PID}" > ${CONTROL_FILE_NAME}
+  trap 'removeTouchFile' EXIT
   main
 else
   report "Control file touch file found found, update progress is either still running or dead"
