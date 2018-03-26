@@ -40,6 +40,11 @@ echo "Lobby port: ${PORT}"
 echo "Lobby database port: ${DATABASE_PORT}"
 echo "Lobby version tag: ${TAG_NAME}"
 
+if [[ -z "${PORT}" || -z "${DATABASE_PORT}" || "${TAG_NAME}" ]]; then
+  reportError "Required arg missing to lobby.sh"
+  exit 1
+fi
+
 # Retrieve latest triplea version
 if [[ "TAG_NAME" == "latest" ]]; then
   TAG_NAME=$($CURL -s 'https://api.github.com/repos/triplea-game/triplea/releases/latest' \
