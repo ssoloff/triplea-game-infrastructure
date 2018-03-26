@@ -1,8 +1,9 @@
 #!/bin/bash
 
 CURL="curl -L"
-RUN_LOBBY="/root/infrastructure/triplea/lobby/files/run_lobby.sh"
-RUN_LOBBY="/root/infrastructure/triplea/lobby/files/remove_lobby.sh"
+RUN_LOBBY="/root/infrastructure/roles/lobby/files/run_lobby.sh"
+REMOVE_LOBBY="/root/infrastructure/roles/lobby/files/remove_lobby.sh"
+LOBBY_SERVICE_FILE="/root/infrastructure/roles/lobby/files/triplea-lobby.service"
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -56,23 +57,23 @@ function installLobby() {
   unzip -o -d $destFolder ${installerFile}
   rm ${installerFile}
 
+  ## todo: add lobby database port to props (do it outside of this method in case we are changing port)
 
-## todo: add lobby database port to props
   chmod go-rw ${destFolder}/config/lobby/lobby.properties
 
   cp ${RUN_LOBBY} ${destFolder}/
   cp ${REMOVE_LOBBY} ${destFolder}/
   chmod +x ${destFolder}/*.sh
+}
 
+function updateConfig() {
+  local destFolder={$1-}
 
-
-  $CURL $SERVICE_FILE_URL > $SERVICE_FILE_PATH
-  sed -i "s|LOBBY_DIR|$DESTINATION_FOLDER|" $SERVICE_FILE_PATH
-
+  local serviceFileDeployedPath="/lib/systemd/system/triplea-lobby.service"
+  cp ${LOBBY_SERVICE_FILE} > ${serviceFileDeployedPath}
+  sed -i "s|LOBBY_DIR|${destFolder}|" ${serviceFileDeployedPath}
   systemctl enable triplea-lobby
   systemctl daemon-reload
-
-  chown -R triplea:triplea /home/triplea
 }
 
 
@@ -80,6 +81,8 @@ DESTINATION_FOLDER=${DESTINATION_FOLDER}/${TAG_NAME}
 if [ ! -d "${DESTINATION_FOLDER}" ]; then
  report "Lobby ${TAG_NAME} install started"
  installLobby ${DESTINATION_FOLDER} ${TAG_NAME}
+ updateConfig
+ chown -R triplea:triplea /home/triplea
  report "Lobby ${TAG_NAME} install completed"
 fi
 

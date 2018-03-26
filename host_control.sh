@@ -1,7 +1,7 @@
 #!/bin/bash
-LOBBY_DB=/root/infrastructure/roles/lobby_db.sh
-LOBBY=/root/infrastructure/roles/lobby.sh
-BOT=/root/infrastructure/roles/bot.sh
+LOBBY_DB=/root/infrastructure/roles/lobby_db/lobby_db.sh
+LOBBY=/root/infrastructure/roles/lobby/lobby.sh
+BOT=/root/infrastructure/roles/bot/bot.sh
 
 ## note: lobby IP addresses are not secret, but bot IP and database IP addresses are secret
 
