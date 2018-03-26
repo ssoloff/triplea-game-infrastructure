@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -eux
+
+
 . /root/infrastructure/common.sh
 
 CURL="curl -L"
@@ -66,7 +69,6 @@ function installLobby() {
   unzip -o -d ${destFolder} ${installerFile}
   rm ${installerFile}
 
-  ## todo: add lobby database port to props (do it outside of this method in case we are changing port)
 
   chmod go-rw ${destFolder}/config/lobby/lobby.properties
 
@@ -75,6 +77,8 @@ function installLobby() {
   chmod +x ${destFolder}/*.sh
 }
 
+## TODO: update database port + password
+ ## todo: add lobby database port to props (do it outside of this method in case we are changing port)
 function updateConfig() {
   local destFolder={$1-}
 

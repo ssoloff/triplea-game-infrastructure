@@ -3,6 +3,7 @@ LOBBY_DB=/root/infrastructure/roles/lobby_db/lobby_db.sh
 LOBBY=/root/infrastructure/roles/lobby/lobby.sh
 BOT=/root/infrastructure/roles/bot/bot.sh
 
+set -eux
 ## note: lobby IP addresses are not secret, but bot IP and database IP addresses are secret
 
 case "$(hostname)" in
