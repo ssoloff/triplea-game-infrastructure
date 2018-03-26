@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -eux
 
 
 . /root/infrastructure/common.sh
@@ -9,8 +8,9 @@ CURL="curl -L"
 RUN_LOBBY="/root/infrastructure/roles/lobby/files/run_lobby.sh"
 REMOVE_LOBBY="/root/infrastructure/roles/lobby/files/remove_lobby.sh"
 LOBBY_SERVICE_FILE="/root/infrastructure/roles/lobby/files/triplea-lobby.service"
-
 POSITIONAL=()
+
+
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -38,6 +38,7 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
+set -eux
 
 ## TODO: arg check, if any are missing then report an error
 
