@@ -2,8 +2,12 @@
 
 . /root/infrastructure/common.sh
 
+function openFirewallForSsh() {
+  ufw allow 22
+  echo "y" | ufw enable
+}
+
 apt install ufw
-ufw allow 22
-# ufw allow $port
-echo "y" | ufw enable
+## if not open, open firewall for ssh and enable firewall.
+ufw status | grep ^22 | grep -q ALLOW || openFirewallForSsh
 
