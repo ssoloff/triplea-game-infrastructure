@@ -38,7 +38,6 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-set -eux
 
 ## TODO: arg check, if any are missing then report an error
 
@@ -46,6 +45,7 @@ echo "Lobby port: ${PORT}"
 echo "Lobby database port: ${DATABASE_PORT}"
 echo "Lobby version tag: ${TAG_NAME}"
 
+set -eux
 
 # Retrieve latest triplea version
 if [[ "${TAG_NAME}" == "latest" ]]; then
