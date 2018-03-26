@@ -4,33 +4,17 @@ set -eux
 
 PATH=$PATH:/usr/sbin/
 
-LOBBY_DB=/root/infrastructure/triplea/lobby_db.sh
-LOBBY=/root/infrastructure/triplea/lobby.sh
-
 CONTROL_FILE_NAME=".control_lock"
 CONTROL_FILE=$(find /root -maxdepth 1 -name "${CONTROL_FILE_NAME}" -type f -cmin -5)
-
 
 . /root/infrastructure/common.sh
 
 function main() {
   report "Update has started"
   systemInstall
-  applicationInstall
+  /root/infrastructure/host_control.sh
   report "Update has completed"
 }
-
-
-function applicationInstall() {
-  case "$(hostname)" in
-    prerelease_staging)
-    ;;
-    *)
-      reportError "Unknown host: $(hostname)"
-    ;;
-    esac
-}
-
 
 ## install the universal OS components
 function systemInstall() {
