@@ -1,0 +1,12 @@
+[Unit]
+Description=TripleA Lobby Server
+Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
+
+[Service]
+WorkingDirectory=LOBBY_DIR
+User=triplea
+ExecStart=LOBBY_DIR/run_lobby
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

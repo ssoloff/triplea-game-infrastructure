@@ -1,13 +1,15 @@
 #!/bin/bash
-LOBBY_DB=/root/infrastructure/triplea/lobby_db.sh
-LOBBY=/root/infrastructure/triplea/lobby.sh
-BOT=/root/infrastructure/triplea/bot.sh
+LOBBY_DB=/root/infrastructure/roles/lobby_db.sh
+LOBBY=/root/infrastructure/roles/lobby.sh
+BOT=/root/infrastructure/roles/bot.sh
+
+## note: lobby IP addresses are not secret, but bot IP and database IP addresses are secret
 
 case "$(hostname)" in
-  prerelease_staging) # 66.175.213.79
+  prerelease_staging)
     ${LOBBY_DB} --port=5000
-    ${LOBBY} --port=7000 --db=
-    ${BOT} --start_port=8000 --count=2
+    ${LOBBY} --port=7000 --db-port=5000
+    ${BOT} --start_port=8000 --count=2 --lobby-port='7000'
   ;;
   *)
     reportError "Unknown host: $(hostname)"
