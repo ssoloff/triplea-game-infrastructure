@@ -48,7 +48,7 @@ echo "Lobby version tag: ${TAG_NAME}"
 
 
 # Retrieve latest triplea version
-if [[ "TAG_NAME" == "latest" ]]; then
+if [[ "${TAG_NAME}" == "latest" ]]; then
   TAG_NAME=$($CURL -s 'https://api.github.com/repos/triplea-game/triplea/releases/latest' \
         | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
 fi
