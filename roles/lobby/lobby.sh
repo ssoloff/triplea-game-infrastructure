@@ -46,6 +46,7 @@ if [[ "TAG_NAME" == "latest" ]]; then
         | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
 fi
 
+
 function installLobby() {
   local destFolder={$1-}
   local tagName={$2-}
@@ -55,7 +56,7 @@ function installLobby() {
 
   local installerFile="triplea-${tagName}.zip"
   $CURL "https://github.com/triplea-game/triplea/releases/download/${tagName}/triplea-${tagName}-server.zip" > ${installerFile}
-  unzip -o -d $destFolder ${installerFile}
+  unzip -o -d ${destFolder} ${installerFile}
   rm ${installerFile}
 
   ## todo: add lobby database port to props (do it outside of this method in case we are changing port)
@@ -80,10 +81,10 @@ function updateConfig() {
 
 DESTINATION_FOLDER=${DESTINATION_FOLDER}/${TAG_NAME}
 if [ ! -d "${DESTINATION_FOLDER}" ]; then
- report "Lobby ${TAG_NAME} install started"
+ report "Lobby ${TAG_NAME} update started"
  installLobby ${DESTINATION_FOLDER} ${TAG_NAME}
- updateConfig
- chown -R triplea:triplea /home/triplea
- report "Lobby ${TAG_NAME} install completed"
 fi
+updateConfig
+chown -R triplea:triplea /home/triplea
+report "Lobby ${TAG_NAME} update completed"
 
