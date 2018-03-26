@@ -15,7 +15,7 @@ while [[ $# -gt 0 ]]; do
   key="$1"
 
   case ${key} in
-    -p|--port)
+    --lobby-port)
     PORT="$2"
     shift # past argument
     shift # past value

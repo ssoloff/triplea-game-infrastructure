@@ -9,7 +9,7 @@ set -eux
 case "$(hostname)" in
   prerelease_staging)
     ${LOBBY_DB} --port 5000
-    ${LOBBY} --port 7000 --database-port 5000 --tag-name "latest"
+    ${LOBBY} --lobby-port 7000 --database-port 5000 --tag-name latest
     ${BOT} --start_port 8000 --count 2 --lobby-port 7000
   ;;
   *)
