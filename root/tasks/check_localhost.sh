@@ -1,7 +1,8 @@
 #!/bin/bash
 
+. /root/infrastructure/common.sh
 
-report "Check hostname is set $(hostname)"
+echo "Check hostname is not 'localhost'. It is currently: $(hostname)"
 
 if [ "$(hostname)" == "localhost" ]; then
   reportError "Hostname is set to localhost; run ./set_host_name.sh and restart the server"
