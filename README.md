@@ -4,7 +4,6 @@
 
 ```
 bash <(curl -s "https://raw.githubusercontent.com/DanVanAtta/infrastructure/master/first_time_setup.sh")
-crontab -l | { cat; echo "*/1 * * * * git -C /root/infrastructure/ pull --rebase origin master > /dev/null; /root/infrastructure/root/root_cron.sh"; } | crontab -
 ```
 
 Verify setup:
