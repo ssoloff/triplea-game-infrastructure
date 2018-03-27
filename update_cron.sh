@@ -9,7 +9,6 @@ CONTROL_FILE_NAME=".control_lock"
 CONTROL_FILE=$(find /root -maxdepth 1 -name "${CONTROL_FILE_NAME}" -type f -cmin -5)
 
 
-
 ## set up an exit trap to make sure we remove the touch file on exit.
 function removeTouchFile() {
   rm -f /root/${CONTROL_FILE_NAME}

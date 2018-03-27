@@ -3,7 +3,7 @@
 ## First time setup
 
 ```
-bash <(curl -s "https://raw.githubusercontent.com/DanVanAtta/infrastructure/master/first_time_setup.sh")
+bash <(curl -s "https://raw.githubusercontent.com/DanVanAtta/infrastructure/master/setup/first_time_setup.sh")
 ```
 
 Verify setup:
@@ -31,7 +31,7 @@ Verify:
 ## Test and Manual Trigger
 SSH to the machine and run the cron by hand:
 ```
-/root/infrastructure/root/root_cron.sh
+/root/infrastructure/update_cron.sh
 ```
 
 

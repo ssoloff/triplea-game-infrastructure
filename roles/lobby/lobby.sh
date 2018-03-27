@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 . /root/infrastructure/common.sh
 
 CURL="curl -L"
