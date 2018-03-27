@@ -9,11 +9,6 @@ RUN_LOBBY="/root/infrastructure/roles/lobby/files/run_lobby.sh"
 REMOVE_LOBBY="/root/infrastructure/roles/lobby/files/remove_lobby.sh"
 LOBBY_SERVICE_FILE="/root/infrastructure/roles/lobby/files/triplea-lobby.service"
 POSITIONAL=()
-
-TAG_NAME=
-PORT=
-DATABASE_PORT
-
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -57,6 +52,18 @@ if [[ "${TAG_NAME}" == "latest" ]]; then
 fi
 
 
+function installLobbyMain() {
+  local destFolder=/home/triplea/lobby/${TAG_NAME}
+  if [ ! -d "${DESTINATION_FOLDER}" ]; then
+   report "Lobby ${TAG_NAME} update started"
+   installLobby ${DESTINATION_FOLDER} ${TAG_NAME}
+  fi
+  updateConfig
+  chown -R triplea:triplea /home/triplea
+  report "Lobby ${TAG_NAME} update completed"
+}
+
+
 function installLobby() {
   local destFolder=$1
   local tagName=$2
@@ -89,6 +96,7 @@ function updateConfig() {
   systemctl daemon-reload
 }
 
+installLobbyMain
 
 DESTINATION_FOLDER=/home/triplea/lobby/${TAG_NAME}
 if [ ! -d "${DESTINATION_FOLDER}" ]; then
