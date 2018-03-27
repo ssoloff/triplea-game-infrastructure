@@ -66,9 +66,9 @@ fi
 
 function installLobbyMain() {
   local destFolder=/home/triplea/lobby/${TAG_NAME}
-  if [ ! -d "${DESTINATION_FOLDER}" ]; then
+  if [ ! -d "${destFolder}" ]; then
    report "Lobby ${TAG_NAME} update started"
-   installLobby ${DESTINATION_FOLDER} ${TAG_NAME}
+   installLobby ${destFolder} ${TAG_NAME}
   fi
   updateConfig
   chown -R triplea:triplea /home/triplea
