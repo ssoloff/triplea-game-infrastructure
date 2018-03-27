@@ -44,7 +44,7 @@ traperror () {
   local command="${4-}"
   local funcstack="${5-}"
 
-  local errorMsg="ERROR@Line:$line '$command' exit code: $err"
+  local errorMsg="'$command' exit code $err at line $line"
   if [ "$funcstack" != "::" ]; then
     errorMsg="$errorMsg   ... at ${funcstack} "
     if [ "$linecallfunc" != "" ]; then
