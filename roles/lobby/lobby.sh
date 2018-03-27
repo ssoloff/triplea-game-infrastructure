@@ -35,6 +35,20 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 
+function checkArg() {
+  local label=$1
+  local arg=$2
+  if [ -z "$arg" ]; then
+    echo "${label} was not set"
+    exit 1
+  fi
+}
+
+checkArg DATABASE_PORT $DATABASE_PORT
+checkArg PORT $PORT
+checkArg TAG_NAME $TAG_NAME
+
+
 ## TODO: arg check, if any are missing then report an error
 
 echo "Lobby port: ${PORT}"
@@ -94,13 +108,3 @@ function updateConfig() {
 }
 
 installLobbyMain
-
-DESTINATION_FOLDER=/home/triplea/lobby/${TAG_NAME}
-if [ ! -d "${DESTINATION_FOLDER}" ]; then
- report "Lobby ${TAG_NAME} update started"
- installLobby ${DESTINATION_FOLDER} ${TAG_NAME}
-fi
-updateConfig
-chown -R triplea:triplea /home/triplea
-report "Lobby ${TAG_NAME} update completed"
-

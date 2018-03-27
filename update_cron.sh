@@ -24,7 +24,7 @@ if [ -z "$CONTROL_FILE" ]; then
 
   LOG_FILE="$LOG_FOLDER/root_cron_log.$(date +%Y).$(date +%m).$(date +%d)_$(date +%H).$(date +%M).log"
   echo "Cron executing ${date} ${hostname}" > $LOG_FILE
-  /root/infrastructure/system_control.sh 2>&1 >> ${LOG_FILE}
+  /root/infrastructure/system_control.sh &>> ${LOG_FILE}
 else
   report "Control file touch file found found, update progress is either still running or dead"
 fi
