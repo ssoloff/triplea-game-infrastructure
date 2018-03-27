@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -eux
+
+
 . /root/infrastructure/common.sh
 
 grep -q triplea /etc/passwd || adduser --disabled-password --gecos "" triplea

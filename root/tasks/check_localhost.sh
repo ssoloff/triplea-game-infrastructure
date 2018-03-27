@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux
+
 . /root/infrastructure/common.sh
 
 echo "Check hostname is not 'localhost'. It is currently: $(hostname)"

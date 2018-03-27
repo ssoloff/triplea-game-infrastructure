@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux
+
 . /root/infrastructure/common.sh
 
 apt-get -y install \

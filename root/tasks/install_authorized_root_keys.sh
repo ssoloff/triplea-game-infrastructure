@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -eux
+
+
 . /root/infrastructure/common.sh
 
 mkdir -p /root/.ssh
