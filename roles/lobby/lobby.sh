@@ -69,11 +69,10 @@ function installLobby() {
   mkdir -p ${destFolder}
   echo "$tagName" > ${destFolder}/version
 
-  local installerFile="triplea-${tagName}.zip"
-  $CURL "https://github.com/triplea-game/triplea/releases/download/${tagName}/triplea-${tagName}-server.zip" > ${installerFile}
+  local installerFile="triplea-${tagName}-server.zip"
+  wget "https://github.com/triplea-game/triplea/releases/download/${tagName}/${installerFile}"
   unzip -o -d ${destFolder} ${installerFile}
   rm ${installerFile}
-
 
   chmod go-rw ${destFolder}/config/lobby/lobby.properties
 
