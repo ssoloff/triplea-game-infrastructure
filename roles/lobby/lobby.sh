@@ -71,7 +71,7 @@ function installLobbyMain() {
    installLobby ${destFolder} ${TAG_NAME}
    report "Lobby update to: ${TAG_NAME} complete"
   fi
-  updateConfig
+  updateConfig ${destFolder}
   chown -R triplea:triplea /home/triplea
 }
 
