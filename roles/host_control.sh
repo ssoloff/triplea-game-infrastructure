@@ -16,8 +16,10 @@ case "$(hostname)" in
     ${LOBBY_DB} --port=5000 --tag-name=${LATEST}
     ${LOBBY} --lobby-port 7000 --database-port 5000 --tag-name ${LATEST}
     ${BOT} --start_port 8000 --count 2 --lobby-port 7000 --tag-name ${LATEST}
-  ;;
+    ;;
   infra-support)
+    ${SUPPORT}
+    ;;
   *)
     reportError "Unknown host: $(hostname)"
   ;;
