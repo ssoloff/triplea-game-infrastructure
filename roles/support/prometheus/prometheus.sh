@@ -9,5 +9,6 @@ if [ ! -d "${PROM_FOLDER}" ]; then
   wget ${PROM_DL}
   tar xvfz prometheus-*.tar.gz
   rm *.tar.gz
-  mv prom*2.2.1 ${PROM_FOLDER}
+  mv prom*2.2.1* ${PROM_FOLDER}
+  echo "installed prometheus to $(pwd)/${PROM_FOLDER}"
 fi
