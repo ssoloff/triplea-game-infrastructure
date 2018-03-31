@@ -7,13 +7,13 @@ set -ex
 PROM_FOLDER="/home/prometheus/prometheus-2.2.1/"
 PROM_SERVICE_FILE="/root/infrastructure/roles/support/prometheus/files/prometheus.service"
 PROM_DL="https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz"
-
-
 PROM_CONFIG="/home/prometheus/prometheus.yml"
+
 
 cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_FOLDER}
 
 installUser prometheus
+mkdir -p ${PROM_FOLDER}
 
 if [ ! -d "${PROM_FOLDER}" ]; then
   ufw allow 9090
