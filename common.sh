@@ -12,7 +12,8 @@ SECRET_FILE="/home/triplea/secrets"
 ## Sends a notification message to gitter
 ## @param $1 The message to post to gitter activity log.
 function report {
-  local msg="$(hostname): ${1-}"
+  local ip=$(ip route get 1 | awk '{print $NF;exit}')
+  local msg="${ip} $(hostname): ${1-}"
   curl -d "message=${msg}" "$GITTER_TEST_ROOM"
 }
 
@@ -23,7 +24,7 @@ function report {
 ##      New line escape is not respected, msg is limited to single line.
 function reportError {
   local ip=$(ip route get 1 | awk '{print $NF;exit}')
-  local errMsg="${ip}:$(hostname): ${1-}"
+  local errMsg="${ip} $(hostname): ${1-}"
   curl -d "message=${errMsg}" -d level=error "$GITTER_TEST_ROOM"
 }
 
