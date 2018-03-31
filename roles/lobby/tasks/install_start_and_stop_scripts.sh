@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -ex
+
+
 destFolder=$1
 
 RUN_LOBBY="/root/infrastructure/roles/lobby/files/run_lobby.sh"

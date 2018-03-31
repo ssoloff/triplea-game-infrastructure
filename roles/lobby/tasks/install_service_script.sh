@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -ex
 
 destFolder=$1
 serviceFileDeployedPath="/lib/systemd/system/triplea-lobby.service"

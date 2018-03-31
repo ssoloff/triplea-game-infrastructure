@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 function installLobby() {
   local destFolder=$1
   local tagName=$2
