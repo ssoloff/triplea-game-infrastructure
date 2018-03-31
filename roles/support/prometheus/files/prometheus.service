@@ -3,10 +3,10 @@ Description=Prometheus metrics gathering
 Documentation=https://prometheus.io/docs/introduction/first_steps/
 
 [Service]
-WorkingDirectory=/home/prometheus/prometheus-2.2.1
+WorkingDirectory=
 User=prometheus
 Group=prometheus
-ExecStart=EXEC
+ExecStart=
 Restart=always
 
 [Install]
