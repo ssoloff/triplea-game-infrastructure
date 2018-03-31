@@ -4,7 +4,7 @@
 
 set -ex
 
-PROM_FOLDER="/home/prometheus/prometheus-2.2.1"
+PROM_FOLDER="/home/prometheus/prometheus-2.2.1/"
 PROM_SERVICE_FILE="/root/infrastructure/roles/support/prometheus/files/prometheus.service"
 PROM_DL="https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz"
 
