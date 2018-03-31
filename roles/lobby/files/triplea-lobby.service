@@ -5,6 +5,7 @@ Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
 [Service]
 WorkingDirectory=
 User=triplea
+Group=triplea
 ExecStart=
 Restart=always
 

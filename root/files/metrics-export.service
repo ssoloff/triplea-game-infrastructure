@@ -5,6 +5,7 @@ Documentation=https://prometheus.io/docs/introduction/first_steps/
 [Service]
 WorkingDirectory=
 User=metrics
+Group=metrics
 ExecStart=
 Restart=always
 
