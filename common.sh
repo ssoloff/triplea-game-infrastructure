@@ -112,7 +112,7 @@ function installService() {
   cp -v ${localPath} ${deployedFile}
 
   sed -i "s|WorkingDirectory=.*|WorkingDirectory=${installFolder}|" ${deployedFile}
-  sed -i "s|ExecStart=.*|ExecStart=${installFolder}/${runCommand}|" ${deployedFile}
+  sed -i "s|ExecStart=.*|ExecStart=${installFolder}${runCommand}|" ${deployedFile}
 
   systemctl enable ${serviceName}
   systemctl daemon-reload

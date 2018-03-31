@@ -4,7 +4,7 @@ EXPORTER_URL="https://github.com/prometheus/node_exporter/releases/download/v0.1
 
 
 METRICS_SERVICE_FILE="/root/infrastructrure/root/files/metrics_export.service"
-METRICS_FOLDER="/home/metrics/node_exporter"
+METRICS_FOLDER="/home/metrics/node_exporter/"
 
 if [ ! -d "${METRICS_FOLDER}" ]; then
   installuser metrics
