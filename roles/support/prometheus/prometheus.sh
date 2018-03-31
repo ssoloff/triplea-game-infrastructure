@@ -26,4 +26,4 @@ if [ ! -d "${PROM_FOLDER}" ]; then
   echo "installed prometheus to ${PROM_FOLDER}"
 fi
 
-service start prometheus
+service prometheus start
