@@ -6,13 +6,16 @@ set -ex
 
 PROM_FOLDER="/home/prometheus/prometheus-2.2.1"
 PROM_SERVICE_FILE="/root/infrastructure/roles/support/prometheus/files/prometheus.service"
-PROM_START=""
 PROM_DL="https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz"
 
 
+PROM_CONFIG="/home/prometheus/prometheus.yml"
+
+cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_CONFIG}
+
 if [ ! -d "${PROM_FOLDER}" ]; then
   installUser prometheus
-  installService prometheus ${PROM_SERVICE_FILE} ${PROM_FOLDER}
+  installService prometheus ${PROM_SERVICE_FILE} ${PROM_FOLDER} "prometheus --config.file=${PROM_CONFIG}"
   ufw allow 9090
   wget ${PROM_DL}
   tar xvfz prometheus-*.tar.gz
@@ -21,3 +24,5 @@ if [ ! -d "${PROM_FOLDER}" ]; then
 
   echo "installed prometheus to ${PROM_FOLDER}"
 fi
+
+service start prometheus
