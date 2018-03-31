@@ -57,7 +57,7 @@ INSTALL_SUCCESS_FILE="${DEST_FOLDER}/.install.success"
 if [ ! -f "${INSTALL_SUCCESS_FILE}" ]; then
 mkdir -p ${DEST_FOLDER}
 
-  /root/infrastructure/roles/lobby/tasks/install_lobby_artifact.sh ${DEST_FOLDER} ${TAG_NAME}
+  /root/infrastructure/roles/lobby/tasks/install_lobby_artifacts.sh ${DEST_FOLDER} ${TAG_NAME}
   /root/infrastructure/roles/lobby/tasks/install_start_and_stop_scripts.sh ${DEST_FOLDER}
 
   report "Completed update to ${TAG_NAME}"
