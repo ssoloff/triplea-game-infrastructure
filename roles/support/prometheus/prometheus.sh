@@ -25,7 +25,7 @@ fi
 mkdir -p ${PROM_FOLDER}
 
 cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_FOLDER}
-installService prometheus ${PROM_SERVICE_FILE} ${PROM_FOLDER} "prometheus --config-file=${PROM_FOLDER}/prometheus.yml"
+installService prometheus ${PROM_SERVICE_FILE} ${PROM_FOLDER} "prometheus --config.file=${PROM_FOLDER}/prometheus.yml"
 
 
 service prometheus start
