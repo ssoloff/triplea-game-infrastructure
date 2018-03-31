@@ -4,6 +4,8 @@ set -eux
 
 . /root/infrastructure/common.sh
 
+apt-get update
+
 apt-get -y install \
   curl \
   fail2ban \
