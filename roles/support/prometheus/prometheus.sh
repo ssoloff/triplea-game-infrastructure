@@ -13,8 +13,9 @@ PROM_CONFIG="/home/prometheus/prometheus.yml"
 
 cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_FOLDER}
 
+installUser prometheus
+
 if [ ! -d "${PROM_FOLDER}" ]; then
-  installUser prometheus
   ufw allow 9090
   wget ${PROM_DL}
   tar xvfz prometheus-*.tar.gz

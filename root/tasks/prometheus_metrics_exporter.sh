@@ -8,8 +8,9 @@ EXPORTER_URL="https://github.com/prometheus/node_exporter/releases/download/v0.1
 METRICS_SERVICE_FILE="/root/infrastructure/root/files/metrics-export.service"
 METRICS_FOLDER="/home/metrics/node_exporter/"
 
+installUser metrics
+
 if [ ! -d "${METRICS_FOLDER}" ]; then
-  installUser metrics
   ufw allow 9100
   ufw reload
   wget ${EXPORTER_URL}
