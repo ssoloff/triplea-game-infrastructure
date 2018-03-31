@@ -60,10 +60,10 @@ mkdir -p ${DEST_FOLDER}
   /root/infrastructure/roles/lobby/tasks/install_lobby_artifacts.sh ${DEST_FOLDER} ${TAG_NAME}
   /root/infrastructure/roles/lobby/tasks/install_start_and_stop_scripts.sh ${DEST_FOLDER}
 
-  report "Completed update to ${TAG_NAME}"
+  report "Lobby updated to ${TAG_NAME}"
   touch ${INSTALL_SUCCESS_FILE}
 else
-  report "Host is already at version ${TAG_NAME}"
+  report "Lobby is at version ${TAG_NAME}"
 fi
 
 /root/infrastructure/roles/lobby/tasks/install_service_script.sh ${DEST_FOLDER}
