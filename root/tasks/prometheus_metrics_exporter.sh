@@ -10,12 +10,14 @@ METRICS_FOLDER="/home/metrics/node_exporter/"
 
 if [ ! -d "${METRICS_FOLDER}" ]; then
   installUser metrics
-  installService metrics ${METRICS_SERVICE_FILE} ${METRICS_FOLDER} node_exporter
   ufw allow 9100
   ufw reload
   wget ${EXPORTER_URL}
   tar xvfz node_exporter-*.tar.gz
   rm *tar.gz
 
+  installService metrics ${METRICS_SERVICE_FILE} ${METRICS_FOLDER} node_exporter
   mv node_exporter-* ${METRICS_FOLDER}
 fi
+
+service metrics start
