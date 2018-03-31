@@ -9,7 +9,7 @@ METRICS_FOLDER="/home/metrics/node_exporter"
 if [ ! -d "${METRICS_FOLDER}" ]; then
   installuser metrics
   installService metrics ${METRICS_SERVICE_FILE} ${METRICS_FOLDER} node_exporter
-  ufw enable 9100
+  ufw allow 9100
   ufw reload
   wget ${EXPORTER_URL}
   tar xvfz node_exporter-*.tar.gz
