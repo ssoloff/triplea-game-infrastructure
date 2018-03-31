@@ -3,9 +3,9 @@ Description=TripleA Lobby Server
 Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
 
 [Service]
-WorkingDirectory=LOBBY_DIR
+WorkingDirectory=
 User=triplea
-ExecStart=LOBBY_DIR/run_lobby
+ExecStart=
 Restart=always
 
 [Install]

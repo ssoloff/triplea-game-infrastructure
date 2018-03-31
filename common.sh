@@ -70,3 +70,49 @@ function readSecret () {
   fi
   grep "${secretKey}" ${SECRET_FILE} | sed 's/.*=//'
 }
+
+
+
+################################################################
+## Adding a user
+################################################################
+function installUser() {
+  local user=$1
+
+  grep -q ${user} /etc/passwd || adduser --disabled-password --gecos "" prometheus
+  grep -q "^${user}" /etc/sudoers || echo "${user} ALL=(ALL) /usr/sbin/service ${user}" >> /etc/sudoers
+  grep -q "^${user}.*htop" /etc/sudoers || echo "${user} ALL=(ALL) /usr/bin/htop*" >> /etc/sudoers
+  grep -q "^${user}.*iftop" /etc/sudoers || echo "${user} ALL=(ALL) /usr/bin/iftop" >> /etc/sudoers
+
+  mkdir -p /home/${user}/.ssh
+  cat /root/infrastructure/root/files/triplea_user_authorized_keys \
+      /root/infrastructure/root/files/root_user_authorized_keys > /home/${user}/.ssh/authorized_keys
+  chmod 644 /home/${user}/.ssh/authorized_keys
+}
+
+################################################################
+## Service file
+################################################################
+
+##
+ # @param serviceName = name of the service to be installed, eg 'triplea-lobby'
+ # @param localPath = the path in the git clone structure to the service file template,
+ #    should begin with /root/infrastructure/...
+ # @param installFolder = The location where we installed a service
+ # @param  runCommand = A command relative to the installFolder used to start the service
+ ##
+function installService() {
+  local serviceName=$1
+  local localPath=$2
+  local installFolder=$3
+  local runCommand=$4
+
+  local deployedFile="/lib/systemd/system/${serviceName}.service"
+  cp -v ${localPath} ${deployedFile}
+
+  sed -i "s|WorkingDirectory=.*|WorkingDirectory=${installFolder}|" ${deployedFile}
+  sed -i "s|ExecStart=.*|ExecStart=${installFolder}/${runCommand}|" ${deployedFile}
+
+  systemctl enable ${serviceName}
+  systemctl daemon-reload
+}

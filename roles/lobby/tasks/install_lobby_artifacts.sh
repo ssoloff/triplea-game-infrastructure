@@ -2,6 +2,8 @@
 
 set -ex
 
+. /root/infrastructure/common.sh
+
 function installLobby() {
   local destFolder=$1
   local tagName=$2

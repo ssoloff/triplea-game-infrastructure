@@ -1,0 +1,12 @@
+[Unit]
+Description=Exports metrics to a port which can then be scraped by metrics collector
+Documentation=https://prometheus.io/docs/introduction/first_steps/
+
+[Service]
+WorkingDirectory=
+User=metrics
+ExecStart=
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

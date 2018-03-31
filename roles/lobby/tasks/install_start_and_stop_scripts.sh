@@ -2,6 +2,7 @@
 
 set -ex
 
+. /root/infrastructure/common.sh
 
 destFolder=$1
 
