@@ -15,12 +15,12 @@ cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_F
 
 if [ ! -d "${PROM_FOLDER}" ]; then
   installUser prometheus
-  installService prometheus ${PROM_SERVICE_FILE} ${PROM_FOLDER} "prometheus"
   ufw allow 9090
   wget ${PROM_DL}
   tar xvfz prometheus-*.tar.gz
   rm *.tar.gz
   mv prom*2.2.1* ${PROM_FOLDER}
+  installService prometheus ${PROM_SERVICE_FILE} ${PROM_FOLDER} "prometheus"
 
   echo "installed prometheus to ${PROM_FOLDER}"
 fi
