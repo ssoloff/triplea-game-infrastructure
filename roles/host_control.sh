@@ -2,7 +2,7 @@
 LOBBY_DB=/root/infrastructure/roles/lobby_db/lobby_db.sh
 LOBBY=/root/infrastructure/roles/lobby/lobby.sh
 BOT=/root/infrastructure/roles/bot/bot.sh
-SUPPORT=/root/infrastructure/roles/support/support.sh
+PROMETHEUS=/root/infrastructure/roles/support/prometheus/prometheus.sh
 
 set -eux
 ## note: lobby IP addresses are not secret, but bot IP and database IP addresses are secret
@@ -18,7 +18,7 @@ case "$(hostname)" in
     ${BOT} --start_port 8000 --count 2 --lobby-port 7000 --tag-name ${LATEST}
     ;;
   infra-support)
-    ${SUPPORT}
+    ${PROMETHEUS}
     ;;
   *)
     reportError "Unknown host: $(hostname)"
