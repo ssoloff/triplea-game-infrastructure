@@ -12,4 +12,4 @@ if [ -z "${NEW_HOST_NAME}" ]; then
 fi
 
 echo "$NEW_HOST_NAME" > /etc/hostname
-sed -i "s/^\(127.0.0.1.*localhost\)$/\1 ${NEW_HOST_NAME}/" /etc/hosts
+sed -i "s/^\(127.0.0.1.*\)localhost$/\1 ${NEW_HOST_NAME} localhost/" /etc/hosts

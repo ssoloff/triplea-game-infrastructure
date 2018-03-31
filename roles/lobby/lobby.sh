@@ -2,10 +2,6 @@
 
 . /root/infrastructure/common.sh
 
-CURL="curl -L"
-RUN_LOBBY="/root/infrastructure/roles/lobby/files/run_lobby.sh"
-REMOVE_LOBBY="/root/infrastructure/roles/lobby/files/remove_lobby.sh"
-LOBBY_SERVICE_FILE="/root/infrastructure/roles/lobby/files/triplea-lobby.service"
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
   key="$1"
@@ -44,67 +40,37 @@ function checkArg() {
   fi
 }
 
-checkArg DATABASE_PORT $DATABASE_PORT
-checkArg PORT $PORT
-checkArg TAG_NAME $TAG_NAME
+set -ex
 
-
-## TODO: arg check, if any are missing then report an error
+checkArg DATABASE_PORT ${DATABASE_PORT}
+checkArg PORT ${PORT}
+checkArg TAG_NAME ${TAG_NAME}
 
 echo "Lobby port: ${PORT}"
 echo "Lobby database port: ${DATABASE_PORT}"
 echo "Lobby version tag: ${TAG_NAME}"
 
-set -ex
 
-# Retrieve latest triplea version
-if [[ "${TAG_NAME}" == "latest" ]]; then
-  TAG_NAME=$($CURL -s 'https://api.github.com/repos/triplea-game/triplea/releases/latest' \
-        | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
+DEST_FOLDER="/home/triplea/lobby/${TAG_NAME}"
+INSTALL_SUCCESS_FILE="${DEST_FOLDER}/.install.success"
+
+if [ ! -f "${INSTALL_SUCCESS_FILE}" ]; then
+mkdir -p ${DEST_FOLDER}
+
+  /root/infrastructure/roles/lobby/tasks/install_lobby_artifact.sh ${DEST_FOLDER} ${TAG_NAME}
+  /root/infrastructure/roles/lobby/tasks/install_start_and_stop_scripts.sh ${DEST_FOLDER}
+
+  report "Completed update to ${TAG_NAME}"
+  touch ${INSTALL_SUCCESS_FILE}
+else
+  report "Host is already at version ${TAG_NAME}"
 fi
 
-
-function installLobbyMain() {
-  local destFolder=/home/triplea/lobby/${TAG_NAME}
-  if [ ! -d "${destFolder}" ]; then
-   report "Lobby update to: ${TAG_NAME} started"
-   installLobby ${destFolder} ${TAG_NAME}
-   report "Lobby update to: ${TAG_NAME} complete"
-  fi
-  updateConfig ${destFolder}
-  chown -R triplea:triplea /home/triplea
-}
+/root/infrastructure/roles/lobby/tasks/install_service_script.sh ${DEST_FOLDER}
 
 
-function installLobby() {
-  local destFolder=$1
-  local tagName=$2
 
-  mkdir -p ${destFolder}
-  echo "$tagName" > ${destFolder}/version
 
-  local installerFile="triplea-${tagName}-server.zip"
-  wget "https://github.com/triplea-game/triplea/releases/download/${tagName}/${installerFile}"
-  unzip -o -d ${destFolder} ${installerFile}
-  rm ${installerFile}
 
-  chmod go-rw ${destFolder}/config/lobby/lobby.properties
 
-  cp ${RUN_LOBBY} ${destFolder}/
-  cp ${REMOVE_LOBBY} ${destFolder}/
-  chmod +x ${destFolder}/*.sh
-}
 
-## TODO: update database port + password
- ## todo: add lobby database port to props (do it outside of this method in case we are changing port)
-function updateConfig() {
-  local destFolder=$1
-
-  local serviceFileDeployedPath="/lib/systemd/system/triplea-lobby.service"
-  cp -v ${LOBBY_SERVICE_FILE} ${serviceFileDeployedPath}
-  sed -i "s|LOBBY_DIR|${destFolder}|" ${serviceFileDeployedPath}
-  systemctl enable triplea-lobby
-  systemctl daemon-reload
-}
-
-installLobbyMain

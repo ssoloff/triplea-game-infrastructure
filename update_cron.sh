@@ -5,7 +5,10 @@
 
 
 PATH=$PATH:/usr/sbin/
+
+## the control file is a lock file to prevent concurrent running fo the script
 CONTROL_FILE_NAME=".control_lock"
+## we'll consider lock files older than 5 minutes to have died
 CONTROL_FILE=$(find /root -maxdepth 1 -name "${CONTROL_FILE_NAME}" -type f -cmin -5)
 
 
@@ -20,11 +23,11 @@ if [ -z "$CONTROL_FILE" ]; then
   trap 'removeTouchFile' EXIT
 
   LOG_FOLDER="/root/logs/$(date +%Y)/$(date +%m)/$(date +%d)/$(date +%H)"
-  mkdir -p ${LOG_FOLDER}
-
   LOG_FILE="$LOG_FOLDER/root_cron_log.$(date +%Y).$(date +%m).$(date +%d)_$(date +%H).$(date +%M).log"
+  mkdir -p "$(dirname ${LOG_FILE})"
+
   echo "Cron executing ${date} ${hostname}" > $LOG_FILE
-  /root/infrastructure/system_control.sh &>> ${LOG_FILE}
+  /root/infrastructure/system_update.sh &>> ${LOG_FILE}
 else
   report "Control file touch file found found, update progress is either still running or dead"
 fi

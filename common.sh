@@ -1,6 +1,7 @@
 
 GITTER_TEST_ROOM="https://webhooks.gitter.im/e/21367d2247fd87a9255b"
 
+SECRET_FILE="/home/triplea/secrets"
 
 
 ################################################################
@@ -56,3 +57,16 @@ traperror () {
   reportError "$errorMsg"
 }
 
+
+################################################################
+## Reading from secrets file
+# # Each host will have a file installed in a well known location
+################################################################
+function readSecret () {
+  local secretKey=$1
+  if [ ! -f ${SECRET_FILE} ]; then
+    reportError "Secret file is missing: ${SECRET_FILE}"
+    exit 1
+  fi
+  grep "${secretKey}" ${SECRET_FILE} | sed 's/.*=//'
+}

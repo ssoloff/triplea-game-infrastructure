@@ -1,10 +1,19 @@
 # Infrastructure
 
+
+- cron does an update of the deployed infrastructure code by removing the infrastructure folder and creating a 
+  new clone.
+  
+
 ## First time setup
 
 ```
 bash <(curl -s "https://raw.githubusercontent.com/DanVanAtta/infrastructure/master/setup/first_time_setup.sh")
 ```
+
+Wait for cronjob to kick in, then run `./infrastructure/setupset_host_name.sh <hostName>`
+
+
 
 Verify setup:
 * should notice an 'infrastructure' folder: `ls /root/`
