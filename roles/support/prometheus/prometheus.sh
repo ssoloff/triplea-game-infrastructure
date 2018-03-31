@@ -10,10 +10,10 @@ PROM_DL="https://github.com/prometheus/prometheus/releases/download/v2.2.1/prome
 PROM_CONFIG="/home/prometheus/prometheus.yml"
 
 
-cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_FOLDER}
 
 installUser prometheus
 mkdir -p ${PROM_FOLDER}
+cp "/root/infrastructure/roles/support/prometheus/files/prometheus.yml" ${PROM_FOLDER}
 
 if [ ! -d "${PROM_FOLDER}" ]; then
   ufw allow 9090
