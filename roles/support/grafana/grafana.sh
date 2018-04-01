@@ -9,6 +9,7 @@ GRAFANA_DIR="/home/grafana/grafana-2.5.0/"
 mkdir -p ${GRAFANA_DIR}
 
 if [ ! -d ${GRAFANA_DIR} ]; then
+  ufw allow 3000
   curl -L -O https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0.linux-x64.tar.gz
   tar zxf grafana-2.5.0.linux-x64.tar.gz
   rm *tar.gz
