@@ -26,7 +26,16 @@ while [ "$1" != "" ]; do
     shift
 done
 
+if [ -z "${DB_PORT}" ]; then
+  reportError "DB port was not set"
+  exit 1
+fi
 
-/root/infrastructure/roles/lobby_db/tasks/install_postgres.sh
-/root/infrastructure/roles/lobby_db/tasks/flyway.sh
+if [ -z "${TAG}" ]; then
+  reportError "Tag was not set"
+  exit 1
+fi
+
+/root/infrastructure/roles/lobby_db/tasks/install_postgres.sh ${DB_PORT}
+/root/infrastructure/roles/lobby_db/tasks/flyway.sh ${TAG}
 
