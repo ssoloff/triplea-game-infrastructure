@@ -19,4 +19,4 @@ fi
 installService grafana ${GRAFANA_SERVICE_FILE} ${GRAFANA_DIR} "bin/grafana-server web"
 installUser grafana
 chown -R grafana:grafana /home/grafana/
-
+service grafana start
