@@ -3,8 +3,14 @@ set -ex
 . /root/infrastructure/common.sh
 
 TAG_NAME=$1
-MIGRATIONS_URL="https://github.com/triplea-game/triplea/releases/download/${TAG_NAME}/migrations.zip"
 
+if [ -z "${TAG_NAME}" ]; then
+  echo "tag name cannot be empty"
+  exit 1
+fi
+
+
+MIGRATIONS_URL="https://github.com/triplea-game/triplea/releases/download/${TAG_NAME}/migrations.zip"
 FLYWAY_INSTALL_URL="https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.0.7/flyway-commandline-5.0.7-linux-x64.tar.gz"
 
 FLYWAY_FOLDER="/home/triplea/flyway-5.0.7/"
