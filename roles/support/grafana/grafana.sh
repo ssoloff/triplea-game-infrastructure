@@ -4,7 +4,7 @@
 
 set -ex
 
-GRAFANA_SERVICE_FILE="/root/infrastructure/roles/support/prometheus/files/grafana.service"
+GRAFANA_SERVICE_FILE="/root/infrastructure/roles/support/grafana/files/grafana.service"
 GRAFANA_DIR="/home/grafana/grafana-2.5.0/"
 
 if [ ! -d ${GRAFANA_DIR} ]; then
