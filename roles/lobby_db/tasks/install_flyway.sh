@@ -13,5 +13,15 @@ if [ ! -d ${FLYWAY_FOLDER} ]; then
   rm *tar.gz
 
   mv flyway* ${FLYWAY_FOLDER}
-  chown -R triplea:triplea /home/triplea/
 fi
+
+
+CONF_FILE="${FLYWAY_FOLDER}/conf/flway.conf"
+cp -v "/root/infrastructure/roles/lobby_db/files/flyway.conf" "${CONF_FILE}"
+
+readSecret "db_user"
+
+sed -i "s/user=.*/user=$(readSecret db_user)/" ${CONF_FILE}
+sed -i "s/password=.*/user=$(readSecret db_password)/" ${CONF_FILE}
+
+chown -R triplea:triplea /home/triplea/
