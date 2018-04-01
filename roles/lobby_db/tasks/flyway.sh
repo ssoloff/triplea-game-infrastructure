@@ -35,6 +35,7 @@ set -x
 
 MIGRATIONS_FOLDER="/home/triplea/lobby_db/migrations"
 
+rm -f migrations.zip*
 wget "${MIGRATIONS_URL}"
 rm -rf "${MIGRATIONS_FOLDER}"
 unzip -D ${MIGRATIONS_FOLDER} migrations.zip
