@@ -2,7 +2,7 @@
 set -ex
 . /root/infrastructure/common.sh
 
-apt -y postgresql postgresql-contrib
+apt install -y postgresql postgresql-contrib
 
 ## TODO: automate setting of password
 ## sudo -u postgres psql postgres

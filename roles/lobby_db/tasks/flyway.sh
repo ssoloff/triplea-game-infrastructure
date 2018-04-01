@@ -23,4 +23,5 @@ sed -i "s/password=.*/user=$(readSecret db_password)/" ${CONF_FILE}
 chown -R triplea:triplea /home/triplea/
 
 
+
 # ${FLYWAY_FOLDER}/flyway
