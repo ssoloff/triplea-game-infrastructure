@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -ex
 . /root/infrastructure/common.sh
 
 while [ "$1" != "" ]; do
@@ -25,4 +26,8 @@ while [ "$1" != "" ]; do
     shift
 done
 
+
+/root/infrastructure/roles/lobby_db/tasks/install_postgres.sh
+/root/infrastructure/roles/lobby_db/tasks/install_flyway.sh
+/root/infrastructure/roles/lobby_db/tasks/run_flyway.sh
 

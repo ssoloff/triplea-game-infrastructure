@@ -5,6 +5,12 @@
   new clone.
   
 
+***TODO***: be sure to update cron job schedule on each iteration 
+if we can so we can change it
+
+***TODO***: good checks that secret file is present
+
+
 ## First time setup
 
 ```
