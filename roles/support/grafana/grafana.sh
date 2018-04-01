@@ -6,7 +6,6 @@ set -ex
 
 GRAFANA_SERVICE_FILE="/root/infrastructure/roles/support/prometheus/files/grafana.service"
 GRAFANA_DIR="/home/grafana/grafana-2.5.0/"
-mkdir -p ${GRAFANA_DIR}
 
 if [ ! -d ${GRAFANA_DIR} ]; then
   ufw allow 3000
