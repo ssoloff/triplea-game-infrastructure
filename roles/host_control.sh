@@ -6,12 +6,9 @@ PROMETHEUS=/root/infrastructure/roles/support/prometheus/prometheus.sh
 GRAFANA=/root/infrastructure/roles/support/grafana/grafana.sh
 
 set -eux
-## note: lobby IP addresses are not secret, but bot IP and database IP addresses are secret
 
-
-LATEST_RELEASE=$(curl -s 'https://api.github.com/repos/triplea-game/triplea/releases/latest' \
-    | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
-
+#LATEST_RELEASE=$(curl -s 'https://api.github.com/repos/triplea-game/triplea/releases/latest' \
+#    | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
 
 TEMP_FILE=$(tempfile)
 curl  -sq 'https://api.github.com/repos/triplea-game/triplea/tags' | \
