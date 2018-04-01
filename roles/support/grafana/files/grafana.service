@@ -1,0 +1,13 @@
+[Unit]
+Description=Grafana metrics visualization
+Documentation=https://prometheus.io/docs/visualization/grafana/#installing
+
+[Service]
+WorkingDirectory=
+User=grafana
+Group=grafana
+ExecStart=
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

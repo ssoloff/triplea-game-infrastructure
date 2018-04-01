@@ -21,4 +21,5 @@ if [ ! -d "${METRICS_FOLDER}" ]; then
   mv node_exporter-* ${METRICS_FOLDER}
 fi
 
+chown -R metrics:metrics /home/metrics/
 service metrics start
