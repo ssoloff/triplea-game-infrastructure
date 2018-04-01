@@ -16,12 +16,11 @@ if [ ! -d ${FLYWAY_FOLDER} ]; then
 fi
 
 
-CONF_FILE="${FLYWAY_FOLDER}/conf/flway.conf"
+CONF_FILE="${FLYWAY_FOLDER}/conf/flyway.conf"
 cp -v "/root/infrastructure/roles/lobby_db/files/flyway.conf" "${CONF_FILE}"
-
-readSecret "db_user"
-
 sed -i "s/user=.*/user=$(readSecret db_user)/" ${CONF_FILE}
 sed -i "s/password=.*/user=$(readSecret db_password)/" ${CONF_FILE}
-
 chown -R triplea:triplea /home/triplea/
+
+
+# ${FLYWAY_FOLDER}/flyway

@@ -28,6 +28,5 @@ done
 
 
 /root/infrastructure/roles/lobby_db/tasks/install_postgres.sh
-/root/infrastructure/roles/lobby_db/tasks/install_flyway.sh
-/root/infrastructure/roles/lobby_db/tasks/run_flyway.sh
+/root/infrastructure/roles/lobby_db/tasks/flyway.sh
 
