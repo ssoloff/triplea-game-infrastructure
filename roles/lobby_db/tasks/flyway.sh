@@ -39,8 +39,9 @@ rm -f migrations.zip*
 wget "${MIGRATIONS_URL}"
 rm -rf "${MIGRATIONS_FOLDER}"
 unzip -d ${MIGRATIONS_FOLDER} migrations.zip
-
+rm -f migrations.zip*
 chown -R triplea:triplea /home/triplea/
+
 
 
 # ${FLYWAY_FOLDER}/flyway
