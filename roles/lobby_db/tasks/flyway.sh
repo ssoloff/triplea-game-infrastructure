@@ -2,13 +2,15 @@
 set -ex
 . /root/infrastructure/common.sh
 
+TAG_NAME=$1
+MIGRATIONS_URL="https://github.com/triplea-game/triplea/releases/download/${TAG_NAME}/migrations.zip"
 
-URL="https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.0.7/flyway-commandline-5.0.7-linux-x64.tar.gz"
+FLYWAY_INSTALL_URL="https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.0.7/flyway-commandline-5.0.7-linux-x64.tar.gz"
 
 FLYWAY_FOLDER="/home/triplea/flyway-5.0.7/"
 
 if [ ! -d ${FLYWAY_FOLDER} ]; then
-  wget $URL
+  wget ${FLYWAY_INSTALL_URL}
   tar xvf flyway*tar.gz
   rm *tar.gz
 
@@ -23,8 +25,16 @@ set +x
 sed -i "s/user=.*/user=$(readSecret db_user)/" ${CONF_FILE}
 sed -i "s/password=.*/user=$(readSecret db_password)/" ${CONF_FILE}
 set -x
-chown -R triplea:triplea /home/triplea/
 
+
+MIGRATIONS_FOLDER="/home/triplea/lobby_db/migrations"
+
+wget "${MIGRATIONS_URL}"
+rm ${MIGRATIONS_FOLDER}
+unzip -D ${MIGRATIONS_FOLDER} migrations.zip
+
+
+chown -R triplea:triplea /home/triplea/
 
 
 # ${FLYWAY_FOLDER}/flyway
