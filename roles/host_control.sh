@@ -14,7 +14,7 @@ LATEST=$(curl -s 'https://api.github.com/repos/triplea-game/triplea/releases/lat
 
 case "$(hostname)" in
   prerelease_staging)
-    ${LOBBY_DB} --port=5000 --tag-name=${LATEST}
+    ${LOBBY_DB} --port=5432 --tag-name=${LATEST}
     ${LOBBY} --lobby-port 7000 --database-port 5000 --tag-name ${LATEST}
     ${BOT} --start_port 8000 --count 2 --lobby-port 7000 --tag-name ${LATEST}
     ;;
