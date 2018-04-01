@@ -37,5 +37,6 @@ if [ -z "${TAG}" ]; then
 fi
 
 /root/infrastructure/roles/lobby_db/tasks/install_postgres.sh ${DB_PORT}
+report "Running DB migration ${TAG}"
 /root/infrastructure/roles/lobby_db/tasks/flyway.sh ${TAG}
 
