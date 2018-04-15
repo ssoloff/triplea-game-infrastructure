@@ -1,14 +1,12 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 . /root/infrastructure/common.sh
 
 function installLobby() {
   local destFolder=$1
   local tagName=$2
-
-
 
   echo "$tagName" > ${destFolder}/version
 
@@ -17,7 +15,6 @@ function installLobby() {
   unzip -o -d ${destFolder} ${installerFile}
   rm ${installerFile}
 
-  chmod go-rw ${destFolder}/config/lobby/lobby.properties
 }
 
 installLobby $1 $2

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 
 . /root/infrastructure/common.sh
@@ -10,7 +10,7 @@ function openFirewallForSsh() {
   echo "y" | ufw enable
 }
 
-apt install ufw
+apt install -y ufw
 ## if not open, open firewall for ssh and enable firewall.
 ufw status | grep ^22 | grep -q ALLOW || openFirewallForSsh
 

@@ -1,42 +1,32 @@
 #!/bin/bash
 
-set -ex
+set -e
 . /root/infrastructure/common.sh
 
 while [ "$1" != "" ]; do
-    PARAM=`echo $1 | awk -F= '{print $1}'`
-    VALUE=`echo $1 | awk -F= '{print $2}'`
-    case $PARAM in
-        -h | --help)
-            usage
-            exit
-            ;;
-        --tag-name)
-            TAG=$VALUE
-            ;;
-        --port)
-            DB_PORT=$VALUE
-            ;;
-        *)
-            echo "ERROR: unknown parameter \"$PARAM\""
-            usage
-            exit 1
-            ;;
-    esac
-    shift
+  PARAM=$1
+  VALUE=$2
+  case ${PARAM} in
+    --database-port)
+      DB_PORT=${VALUE}
+      ;;
+    --tag-name)
+      TAG_NAME="${VALUE}"
+      ;;
+     *)
+      echo "ERROR: unknown parameter \"${PARAM}\""
+      exit 1
+      ;;
+  esac
+  shift
+  shift
 done
 
-if [ -z "${DB_PORT}" ]; then
-  reportError "DB port was not set"
-  exit 1
-fi
-
-if [ -z "${TAG}" ]; then
-  reportError "Tag was not set"
-  exit 1
-fi
+checkArg TAG_NAME ${TAG_NAME}
+checkArg DB_PORT ${DB_PORT}
 
 /root/infrastructure/roles/lobby_db/tasks/install_postgres.sh ${DB_PORT}
-report "Running DB migration ${TAG}"
-/root/infrastructure/roles/lobby_db/tasks/flyway.sh ${TAG}
+report "Running DB migration ${TAG_NAME}"
+/root/infrastructure/roles/lobby_db/tasks/flyway.sh ${TAG_NAME}
 
+checkServiceIsRunning postgresql

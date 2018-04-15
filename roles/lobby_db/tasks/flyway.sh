@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 . /root/infrastructure/common.sh
 
 TAG_NAME=$1
@@ -27,21 +27,23 @@ fi
 CONF_FILE="${FLYWAY_FOLDER}/conf/flyway.conf"
 cp -v "/root/infrastructure/roles/lobby_db/files/flyway.conf" "${CONF_FILE}"
 
-set +x
 sed -i "s/flyway.user=.*/flyway.user=$(readSecret db_user)/" ${CONF_FILE}
 sed -i "s/flyway.password=.*/flyway.password=$(readSecret db_password)/" ${CONF_FILE}
-set -x
 
 
-MIGRATIONS_FOLDER="/home/triplea/lobby_db/migrations"
+MIGRATIONS_FOLDER="${FLYWAY_FOLDER}/sql/"
 
 rm -f migrations.zip*
 wget "${MIGRATIONS_URL}"
 rm -rf "${MIGRATIONS_FOLDER}"
+
+rm -f ${MIGRATIONS_FOLDER}/*
 unzip -d ${MIGRATIONS_FOLDER} migrations.zip
 rm -f migrations.zip*
 chown -R triplea:triplea /home/triplea/
 
 
+${FLYWAY_FOLDER}/flyway migrate
 
-# ${FLYWAY_FOLDER}/flyway
+SCHEMA=$(${FLYWAY_FOLDER}/flyway info | grep "Schema version")
+report "Database schema is now at: ${SCHEMA}"

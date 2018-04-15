@@ -2,7 +2,7 @@
 
 . /root/infrastructure/common.sh
 
-set -ex
+set -e
 
 PROM_FOLDER="/home/prometheus/prometheus-2.2.1/"
 PROM_SERVICE_FILE="/root/infrastructure/roles/support/prometheus/files/prometheus.service"

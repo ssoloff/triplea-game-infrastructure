@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $USER != "root" ]]; then
+if [[ ${USER} != "root" ]]; then
   echo "This script must be run as root"
   echo "Type 'sudo $0'"
   exit 1
@@ -27,8 +27,10 @@ if [[ $REPLY =~ ^[Yy]$ || $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
     cd ..
   fi
   rm -r "$DIR"
-fi
 
-echo "The triplea lobby software was successfully removed from your computer"
-echo "The triplea user still exists. Run 'deluser --remove-home triplea' to remove this user"
-echo "Be aware, that this user is also used by the bot software"
+  echo "The triplea lobby software was successfully removed from your computer"
+  echo "The triplea user still exists. Run 'deluser --remove-home triplea' to remove this user"
+  echo "Be aware, that this user is also used by the bot software"
+else
+  echo "uninstall aborted"
+fi

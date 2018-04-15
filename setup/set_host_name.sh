@@ -3,7 +3,7 @@
 
 NEW_HOST_NAME=$1
 
-set -eux
+set -eu
 
 if [ -z "${NEW_HOST_NAME}" ]; then
   echo "Need to supply host name as argument"

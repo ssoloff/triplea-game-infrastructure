@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 CLEAN="rm -rf /root/infrastructure/"
 ## TODO: update repo name from fork to triplea-game

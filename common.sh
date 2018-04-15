@@ -14,7 +14,7 @@ SECRET_FILE="/home/triplea/secrets"
 function report {
   local ip=$(ip route get 1 | awk '{print $NF;exit}')
   local msg="${ip} $(hostname): ${1-}"
-  curl -d "message=${msg}" "$GITTER_TEST_ROOM"
+  curl -sd "message=${msg}" "$GITTER_TEST_ROOM"
 }
 
 ## Sends an error message to gitter. Messages are posted to activity log
@@ -25,7 +25,7 @@ function report {
 function reportError {
   local ip=$(ip route get 1 | awk '{print $NF;exit}')
   local errMsg="${ip} $(hostname): ${1-}"
-  curl -d "message=${errMsg}" -d level=error "$GITTER_TEST_ROOM"
+  curl -sd "message=${errMsg}" -d level=error "$GITTER_TEST_ROOM"
 }
 
 
@@ -56,6 +56,55 @@ traperror () {
     errorMsg="$errorMsg  ... internal debug info from function ${FUNCNAME} (line $linecallfunc)"
   fi
   reportError "$errorMsg"
+}
+
+################################################################
+## Error checking
+################################################################
+
+
+function checkFile() {
+  local file=$1
+  if [ ! -f "${file}" ]; then
+    reportError "File not found: ${file}"
+    exit 1
+  fi
+}
+
+function checkFolder() {
+  local folder=$1
+  if [ ! -d "${folder}" ]; then
+    reportError "Folder not found: ${folder}"
+    exit 1
+  fi
+}
+
+function checkArg() {
+  local argLabel=$1
+  local argValue=${2-}
+  if [ -z "${argValue}" ]; then
+    reportError "Arg: ${argLabel}, needs to be specified"
+    exit 1
+  fi
+}
+
+
+
+function checkServiceIsRunning() {
+  local serviceName=$1
+  service "${serviceName}" status | grep "Active: active"  \
+      || reportError"${serviceName} is NOT running"
+}
+
+
+function checkPortIsOpen() {
+  local port=$1
+  if [ -z "${port}" ]; then
+    reportError "empty port param error"
+    exit 1
+  fi
+
+  nc -z localhost ${port} || reportError "Port: ${port} is not open"
 }
 
 
@@ -117,3 +166,4 @@ function installService() {
   systemctl enable ${serviceName}
   systemctl daemon-reload
 }
+

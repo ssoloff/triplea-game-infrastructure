@@ -1,6 +1,8 @@
 # Infrastructure
 
-
+- when testing, run `crontab -l`, run the command manually. Check `journalctl -f` and logs in `/root/logs/*`
+ 
+ 
 - cron does an update of the deployed infrastructure code by removing the infrastructure folder and creating a 
   new clone.
   
