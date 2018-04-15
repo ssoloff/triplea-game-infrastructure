@@ -16,8 +16,22 @@ curl  -sq 'https://api.github.com/repos/triplea-game/triplea/tags' | \
 LATEST_BUILD=$(cat $TEMP_FILE | sed 's/.*\.//' | sed 's/".*//' | sort -nr | head -1)
 LATEST_TAG=$(grep ${LATEST_BUILD} $TEMP_FILE | sed 's/.* "//' | sed 's/".*$//')
 
+LATEST_RELEASE="1.9.0.0.9687"
+
+PRERELEASE_LOBBY="66.175.213.79"
+PRERELEASE_LOBBY_PORT="7000"
 
 case "$(hostname)" in
+  bot25_ca)
+    ${BOT} \
+      --bot-name bot25_ca \
+      --bot-port 8000 \
+      --bot-start-number 25 \
+      --bot-count 3 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
+      --tag-name ${LATEST_RELEASE}
+    ;;
   prerelease_staging)
     ${LOBBY_DB} \
        --database-port 5432 \
@@ -31,8 +45,8 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 30 \
       --bot-count 2 \
-      --lobby-port 7000 \
-      --lobby-host 66.175.213.79 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
     ;;
   infra-support)
