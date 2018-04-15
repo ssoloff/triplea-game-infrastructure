@@ -26,7 +26,6 @@ checkArg TAG_NAME ${TAG_NAME}
 checkArg DB_PORT ${DB_PORT}
 
 /root/infrastructure/roles/lobby_db/tasks/install_postgres.sh ${DB_PORT}
-report "Running DB migration ${TAG_NAME}"
 /root/infrastructure/roles/lobby_db/tasks/flyway.sh ${TAG_NAME}
 
 checkServiceIsRunning postgresql
