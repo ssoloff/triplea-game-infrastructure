@@ -16,7 +16,7 @@ if we can so we can change it
 ## First time setup
 
 ```
-bash <(curl -s "https://raw.githubusercontent.com/DanVanAtta/infrastructure/master/setup/first_time_setup.sh")
+bash <(curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh")
 ```
 
 Wait for cronjob to kick in, then run `./infrastructure/setupset_host_name.sh <hostName>`

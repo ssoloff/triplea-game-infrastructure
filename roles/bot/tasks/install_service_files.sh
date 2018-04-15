@@ -5,12 +5,13 @@
 . /root/infrastructure/common.sh
 
 TAG_NAME=$1
-BOT_COUNT=$2
-BOT_PORT=$3
-BOT_NAME=$4
-INSTALL_FOLDER=$5
-LOBBY_HOST=$6
-LOBBY_PORT=$7
+BOT_START_NUMBER=$2
+BOT_COUNT=$3
+BOT_PORT=$4
+BOT_NAME=$5
+INSTALL_FOLDER=$6
+LOBBY_HOST=$7
+LOBBY_PORT=$8
 
 set -eu
 
@@ -64,7 +65,7 @@ function createStartStopScripts() {
   rm -f /home/triplea/start_all /home/triplea/stop_all
 
   for i in $(seq -w 01 ${botCount}); do
-    local botNumber=${i}
+    local botNumber=$((BOT_START_NUMBER + i))
     local botPort="40${botNumber}"
 
     ufw allow ${botPort}

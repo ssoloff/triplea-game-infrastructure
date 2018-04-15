@@ -29,6 +29,7 @@ case "$(hostname)" in
     ${BOT} \
       --bot-name prerelease \
       --bot-port 8000 \
+      --bot-start-number 30 \
       --bot-count 2 \
       --lobby-port 7000 \
       --lobby-host 66.175.213.79 \

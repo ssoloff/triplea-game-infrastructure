@@ -12,6 +12,9 @@ while [ "$1" != "" ]; do
     --bot-port)
       BOT_PORT=${VALUE}
       ;;
+    --bot-start-number)
+      BOT_START_NUMBER=${VALUE}
+      ;;
     --bot-count)
       BOT_COUNT=${VALUE}
       ;;
@@ -37,6 +40,7 @@ set -eu
 
 checkArg BOT_NAME ${BOT_NAME}
 checkArg BOT_PORT ${BOT_PORT}
+checkArg BOT_START_NUMBER ${BOT_START_NUMBER}
 checkArg BOT_COUNT ${BOT_COUNT}
 checkArg TAG_NAME ${TAG_NAME}
 checkArg LOBBY_PORT ${LOBBY_PORT}
@@ -51,6 +55,7 @@ fi
 
 /root/infrastructure/roles/bot/tasks/install_service_files.sh \
   ${TAG_NAME} \
+  ${BOT_START_NUMBER} \
   ${BOT_COUNT} \
   ${BOT_PORT} \
   ${BOT_NAME} \
