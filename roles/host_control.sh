@@ -6,6 +6,7 @@ PROMETHEUS=/root/infrastructure/roles/support/prometheus/prometheus.sh
 GRAFANA=/root/infrastructure/roles/support/grafana/grafana.sh
 
 set -eu
+. /root/infrastructure/common.sh
 
 #LATEST_RELEASE=$(curl -s 'https://api.github.com/repos/triplea-game/triplea/releases/latest' \
 #    | python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'])")
