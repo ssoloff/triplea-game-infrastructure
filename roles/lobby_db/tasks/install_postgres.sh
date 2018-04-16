@@ -7,6 +7,7 @@ PORT=$1
 apt install -y postgresql postgresql-contrib
 
 ## TODO: automate setting of password
+## Warning: server needs enough available memory for postgres to start
 ## sudo -u postgres psql postgres
 ## \password postgres
 

@@ -53,7 +53,6 @@ function enforceSshKeysOnly() {
   sed -i 's/ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' ${sshConf}
   sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' ${sshConf}
   sed -i 's/UsePAM.*/UsePAM no/' ${sshConf}
-  sed -i 's/PermitRootLogin.*/PermitRootLogin no/' ${sshConf}
   systemctl reload ssh
 }
 
