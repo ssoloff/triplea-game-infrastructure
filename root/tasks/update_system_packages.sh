@@ -4,9 +4,7 @@ set -eu
 
 . /root/infrastructure/common.sh
 
-apt-get update
-
-apt-get install -y \
+apt install -y \
   curl \
   fail2ban \
   htop \
