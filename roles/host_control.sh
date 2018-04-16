@@ -27,9 +27,19 @@ case "$(hostname)" in
     ${BOT} \
       --bot-name CA_USA \
       --bot-port 8000 \
-      --bot-start-number 25 \
+      --bot-start-number 1 \
       --bot-count 3 \
-      --max-memory 320 \
+      --max-memory 256 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
+      --tag-name ${LATEST_RELEASE}
+    ;;
+  bot35_frankfurt_de)
+      --bot-name FRANKFURT_DE \
+      --bot-port 8000 \
+      --bot-start-number 2 \
+      --bot-count 3 \
+      --max-memory 256 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_RELEASE}
@@ -45,9 +55,9 @@ case "$(hostname)" in
     ${BOT} \
       --bot-name prerelease \
       --bot-port 8000 \
-      --bot-start-number 30 \
+      --bot-start-number 2 \
       --bot-count 2 \
-      --max-memory 320 \
+      --max-memory 256 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
