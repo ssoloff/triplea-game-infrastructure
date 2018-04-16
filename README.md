@@ -1,52 +1,58 @@
 # Infrastructure
 
-- when testing, run `crontab -l`, run the command manually. Check `journalctl -f` and logs in `/root/logs/*`
- 
- 
+
 - cron does an update of the deployed infrastructure code by removing the infrastructure folder and creating a 
   new clone.
   
 
-***TODO***: be sure to update cron job schedule on each iteration 
-if we can so we can change it
-
-***TODO***: good checks that secret file is present
-
-
 # First time setup
 
 ```
-bash <(curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh")
+MY_HOST=[hostname]
+curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh" | bash -s $MY_HOST
 ```
 
-Wait for cronjob to kick in, then run `./infrastructure/setup/set_host_name.sh <hostName>`
+Create secrets file: `/home/triplea/secrets`
+Applications that use database will need additional secrets for DB connectivity, otherwise we just have
+the papertrail tokens.
 
 
-Verify setup:
-* should notice an 'infrastructure' folder: `ls /root/`
+## Verify Setup
+Things to notice and check:
+* 'infrastructure' folder: `ls /root/`
 * `crontab -l` should have a cron installed
-
-Then set hostname:
-```
-/root/infrastructure/set_host_name.sh {hostname}
-```
-
-Verify:
 * `/etc/hostname` should contain the new name
 * `/etc/hosts` file should look like this:
 ```
 127.0.0.1       localhost BotServer_NJ_70
 ```
+* papertrail should have the host reporting
+* prometheus and grafana should pick up the new host
+* update status should be reported to gitter
+* `ps -ef | grep java` will typically have some java processes running
 
-Use `crontab -e` to dial back the cronjob from once every minute to once every 5.
+## Checking Logs
 
-***TODO***: cronjob should be re-installed automatically by our update job, so would be no need to update 
-it to corrected schedule.
+Logs are sent to papertrail and tee'd to log folder at /root/logs
+ 
+
+Live stream of logs:
+```
+journalctl -f
+```
+
+copy of logs are in:
+```
+/root/logs/..../*.log
+```
+
+***TODO*** make sure we have all logs going to all locations, std error might be missing from one of these log streams
+
 
 
 # Adding SSH Keys
-## Generate SSH key:
 
+## Generate SSH key:
 
 To generate a key, kindly use ed25519, generates a short and very powerful encryption key:
 ```
@@ -54,32 +60,18 @@ To generate a key, kindly use ed25519, generates a short and very powerful encry
  eg: ssh-keygen -o -a 100 -t ed25519 -C joe@alien-laptop
 ```
 
-Public keys are copied to one of:
+## Add Key
+Submit PR and add key to one of:
 - super-admin (root user): https://github.com/triplea-game/infrastructure/blob/master/root/files/root_user_authorized_keys
 - basic-admin (triplea user): https://github.com/triplea-game/infrastructure/blob/master/root/files/triplea_user_authorized_keys
 
-To generate a private+public keypair, run:
-```
- ssh-keygen -o -a 100 -t ed25519 -C [user]@[machine]
- eg: ssh-keygen -o -a 100 -t ed25519 -C joe@alien-laptop
-```
-
 
 # Test and Manual Trigger
-SSH to the machine and run the cron by hand:
+
+SSH to the machine and run cron job by hand, to view the cron jobs:
 ```
-/root/infrastructure/update_cron.sh
+crontab -l
 ```
-
-
-# Component (Role) List
-
-- Lobby server
-- Lobby database
-- Bot server
-- Dice server
-- https://forums.triplea-game.org
-
 
 # Setup & Configuration
 

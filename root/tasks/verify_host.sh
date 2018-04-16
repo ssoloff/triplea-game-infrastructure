@@ -10,3 +10,5 @@ if [ "$(hostname)" == "localhost" ]; then
 fi
 
 service metrics status | grep "Active: active"  || reportError "Metrics not running, run: 'service metrics status'"
+
+checkFile ${SECRET_FILE}
