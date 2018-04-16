@@ -46,8 +46,8 @@ case "$(hostname)" in
       --bot-start-number 2 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
   bot35_frankfurt_de)
@@ -57,8 +57,8 @@ case "$(hostname)" in
       --bot-start-number 3 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
   bot45_atlanta_ga)
@@ -68,8 +68,8 @@ case "$(hostname)" in
       --bot-start-number 4 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
   bot55_london_uk)
@@ -79,8 +79,8 @@ case "$(hostname)" in
       --bot-start-number 5 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
   bot65_tokyo_jp)
@@ -90,8 +90,8 @@ case "$(hostname)" in
       --bot-start-number 5 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
 
