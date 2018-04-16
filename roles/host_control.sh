@@ -35,6 +35,7 @@ case "$(hostname)" in
       --tag-name ${LATEST_RELEASE}
     ;;
   bot35_frankfurt_de)
+    ${BOT} \
       --bot-name FRANKFURT_DE \
       --bot-port 8000 \
       --bot-start-number 2 \
