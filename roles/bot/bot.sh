@@ -58,10 +58,8 @@ if [ ! -d "${INSTALL_FOLDER}" ]; then
 fi
 
 /root/infrastructure/roles/bot/tasks/install_service_files.sh \
-  ${TAG_NAME} \
   ${BOT_START_NUMBER} \
   ${BOT_COUNT} \
-  ${BOT_PORT} \
   ${BOT_NAME} \
   ${INSTALL_FOLDER} \
   ${LOBBY_HOST} \
