@@ -35,8 +35,6 @@ function main() {
         wget -O ${dl_file} ${url}
         echo "${last_updated_on}" > ${updated_on_file}
         echo "updated repo: ${repo_name} to latest: ${last_updated_on} from: ${existing_updated_on}"
-      else
-        echo "repo: ${repo_name} is at latest: ${last_updated_on}"
       fi
     fi
   done
