@@ -3,15 +3,24 @@
 set -eu
 
 function main() {
-  local maps_folder="/home/triplea/maps"
-  mkdir -p ${maps_folder}
 
-  curl -sq "https://api.github.com/orgs/triplea-maps/repos?per_page=5000" \
+  downloadMaps 1
+  downloadMaps 2
+}
+
+function downloadMaps() {
+   local pageNumber=$1
+
+   local maps_folder="/home/triplea/maps"
+   mkdir -p ${maps_folder}
+
+   # note page size max is 100 (even if you specify a larger number)
+   curl -sq "https://api.github.com/orgs/triplea-maps/repos?per_page=100&page=${pageNumber}" \
       | egrep -h "html_url|updated_at" | grep -B1 "updated_at" | grep -v "^--" \
       | while read line; do
 
     read last_updated_on
-   
+
     local url=$(echo $line | sed 's/.*https/https/' | sed 's/".*//')/archive/master.zip
     local repo_name=$(echo $line | sed 's|.*/||' | sed 's|".*||')
     local dl_file=${maps_folder}/${repo_name}-master.zip
@@ -38,6 +47,7 @@ function main() {
       fi
     fi
   done
+
 }
 
 main
