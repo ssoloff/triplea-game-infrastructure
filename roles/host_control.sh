@@ -38,8 +38,8 @@ case "$(hostname)" in
       --bot-name FRANKFURT_DE \
       --bot-port 8000 \
       --bot-start-number 2 \
-      --bot-count 10 \
-      --max-memory 80 \
+      --bot-count 5 \
+      --max-memory 128 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_RELEASE}
