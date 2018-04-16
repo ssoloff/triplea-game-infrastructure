@@ -17,12 +17,12 @@ curl  -sq 'https://api.github.com/repos/triplea-game/triplea/tags' | \
 LATEST_BUILD=$(cat $TEMP_FILE | sed 's/.*\.//' | sed 's/".*//' | sort -nr | head -1)
 LATEST_TAG=$(grep ${LATEST_BUILD} $TEMP_FILE | sed 's/.* "//' | sed 's/".*$//')
 
-LATEST_RELEASE="1.9.0.0.10104"
+RELEASE_VERSION="1.9.0.0.10104"
 PRERELEASE_LOBBY="66.175.213.79"
 PRERELEASE_LOBBY_PORT="7000"
 
 case "$(hostname)" in
-  bot25_ca_usa)
+  bot15_newark_nj)
     ${BOT} \
       --bot-name CA_USA \
       --bot-port 8000 \
@@ -31,20 +31,20 @@ case "$(hostname)" in
       --max-memory 128 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${LATEST_RELEASE}
+      --tag-name ${RELEASE_VERSION}
     ;;
-  bot35_frankfurt_de)
+  bot25_ca_usa)
     ${BOT} \
-      --bot-name FRANKFURT_DE \
+      --bot-name CA_USA \
       --bot-port 8000 \
       --bot-start-number 2 \
       --bot-count 5 \
       --max-memory 128 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${LATEST_RELEASE}
+      --tag-name ${RELEASE_VERSION}
     ;;
-  bot45_atlanta_ga)
+  bot35_frankfurt_de)
     ${BOT} \
       --bot-name FRANKFURT_DE \
       --bot-port 8000 \
@@ -53,7 +53,29 @@ case "$(hostname)" in
       --max-memory 128 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${LATEST_RELEASE}
+      --tag-name ${RELEASE_VERSION}
+    ;;
+  bot45_atlanta_ga)
+    ${BOT} \
+      --bot-name FRANKFURT_DE \
+      --bot-port 8000 \
+      --bot-start-number 4 \
+      --bot-count 5 \
+      --max-memory 128 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
+      --tag-name ${RELEASE_VERSION}
+    ;;
+  bot55_london_uk)
+    ${BOT} \
+      --bot-name FRANKFURT_DE \
+      --bot-port 8000 \
+      --bot-start-number 5 \
+      --bot-count 5 \
+      --max-memory 128 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
+      --tag-name ${RELEASE_VERSION}
     ;;
   prerelease_staging)
     ${LOBBY_DB} \
