@@ -21,14 +21,17 @@ RELEASE_VERSION="1.9.0.0.10104"
 PRERELEASE_LOBBY="66.175.213.79"
 PRERELEASE_LOBBY_PORT="7000"
 
+BOT_COUNT=4
+BOT_MEMORY=196
+
 case "$(hostname)" in
   bot15_newark_nj)
     ${BOT} \
       --bot-name NEWARK_NJ \
       --bot-port 8000 \
       --bot-start-number 1 \
-      --bot-count 5 \
-      --max-memory 128 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
@@ -38,8 +41,8 @@ case "$(hostname)" in
       --bot-name CA_USA \
       --bot-port 8000 \
       --bot-start-number 2 \
-      --bot-count 5 \
-      --max-memory 128 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
@@ -49,8 +52,8 @@ case "$(hostname)" in
       --bot-name FRANKFURT_DE \
       --bot-port 8000 \
       --bot-start-number 3 \
-      --bot-count 5 \
-      --max-memory 128 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
@@ -60,8 +63,8 @@ case "$(hostname)" in
       --bot-name ATLANTA_GA \
       --bot-port 8000 \
       --bot-start-number 4 \
-      --bot-count 5 \
-      --max-memory 128 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
@@ -71,8 +74,8 @@ case "$(hostname)" in
       --bot-name LONDON_UK \
       --bot-port 8000 \
       --bot-start-number 5 \
-      --bot-count 5 \
-      --max-memory 128 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
@@ -82,8 +85,8 @@ case "$(hostname)" in
       --bot-name TOKYO_JP \
       --bot-port 8000 \
       --bot-start-number 5 \
-      --bot-count 5 \
-      --max-memory 128 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
@@ -102,7 +105,7 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 9 \
       --bot-count 1 \
-      --max-memory 128 \
+      --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
