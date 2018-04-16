@@ -41,6 +41,7 @@ if [ ! -f "${INSTALL_SUCCESS_FILE}" ]; then
   /root/infrastructure/roles/lobby/tasks/install_lobby_artifacts.sh ${DEST_FOLDER} ${TAG_NAME}
   report "Lobby updated to ${TAG_NAME}"
   touch ${INSTALL_SUCCESS_FILE}
+  service triplea-lobby restart
 else
   report "Lobby is at version ${TAG_NAME}"
 fi
