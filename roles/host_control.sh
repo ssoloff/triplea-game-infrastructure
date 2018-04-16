@@ -22,7 +22,7 @@ PRERELEASE_LOBBY="66.175.213.79"
 PRERELEASE_LOBBY_PORT="7000"
 
 case "$(hostname)" in
-  bot25_ca)
+  bot25_ca_usa)
     ${BOT} \
       --bot-name CA_USA \
       --bot-port 8000 \
