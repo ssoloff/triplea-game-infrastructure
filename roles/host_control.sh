@@ -21,7 +21,7 @@ PRERELEASE_LOBBY="66.175.213.79"
 PRERELEASE_LOBBY_PORT="7000"
 
 BOT_COUNT=4
-BOT_MEMORY=196
+BOT_MEMORY=168
 
 PROD_VERSION="1.9.0.0.10104"
 PROD_LOBBY=45.79.144.53
@@ -35,8 +35,8 @@ case "$(hostname)" in
       --bot-start-number 1 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
   bot25_ca_usa)
