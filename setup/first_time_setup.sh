@@ -3,9 +3,17 @@
 set -e
 
 NEW_HOST_NAME=$1
+PAPERTRAIL_TOKEN=$2
+
+if [ -z "${PAPERTRAIL_TOKEN}" ]; then
+  echo "error, paper trail token needs to be specified"
+  exit 1
+fi
+
 
 function oneTimeSetupMain() {
   setHostName ${NEW_HOST_NAME}
+  addPaperTrailToken ${PAPERTRAIL_TOKEN}
   installCrontab
   enforceSshKeysOnly
 }
@@ -22,6 +30,13 @@ function setHostName() {
   echo "${newHostName}" > /etc/hostname
   sed -i "s/^\(127.0.0.1.*\)localhost$/\1 ${newHostName} localhost/" /etc/hosts
 }
+
+function addPaperTrailToken() {
+  local paperTrailToken=$1
+  mkdir -p /home/triplea
+  echo "papertrail_token=${paperTrailToken}" > /home/triplea/secrets
+}
+
 
 function installCrontab() {
   local clean="rm -rf /root/infrastructure/"

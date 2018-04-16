@@ -9,7 +9,8 @@
 
 ```
 MY_HOST=[hostname]
-curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh" | bash -s $MY_HOST
+PAPERTRAIL_TOKEN=[paperTrailToken]
+curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh" | bash -s $MY_HOST $PAPERTRAIL_TOKEN
 ```
 
 Create secrets file: `/home/triplea/secrets`
