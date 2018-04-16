@@ -17,12 +17,15 @@ curl  -sq 'https://api.github.com/repos/triplea-game/triplea/tags' | \
 LATEST_BUILD=$(cat $TEMP_FILE | sed 's/.*\.//' | sed 's/".*//' | sort -nr | head -1)
 LATEST_TAG=$(grep ${LATEST_BUILD} $TEMP_FILE | sed 's/.* "//' | sed 's/".*$//')
 
-RELEASE_VERSION="1.9.0.0.10104"
 PRERELEASE_LOBBY="66.175.213.79"
 PRERELEASE_LOBBY_PORT="7000"
 
 BOT_COUNT=4
 BOT_MEMORY=196
+
+PROD_VERSION="1.9.0.0.10104"
+PROD_LOBBY=45.79.144.53
+PROD_LOBBY_PORT=3304
 
 case "$(hostname)" in
   bot15_newark_nj)
@@ -32,9 +35,9 @@ case "$(hostname)" in
       --bot-start-number 1 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${RELEASE_VERSION}
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
+      --tag-name ${PROD_VERSION}
     ;;
   bot25_ca_usa)
     ${BOT} \
@@ -45,7 +48,7 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${RELEASE_VERSION}
+      --tag-name ${PROD_VERSION}
     ;;
   bot35_frankfurt_de)
     ${BOT} \
@@ -56,7 +59,7 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${RELEASE_VERSION}
+      --tag-name ${PROD_VERSION}
     ;;
   bot45_atlanta_ga)
     ${BOT} \
@@ -67,7 +70,7 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${RELEASE_VERSION}
+      --tag-name ${PROD_VERSION}
     ;;
   bot55_london_uk)
     ${BOT} \
@@ -78,7 +81,7 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${RELEASE_VERSION}
+      --tag-name ${PROD_VERSION}
     ;;
   bot65_tokyo_jp)
     ${BOT} \
@@ -89,7 +92,7 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
-      --tag-name ${RELEASE_VERSION}
+      --tag-name ${PROD_VERSION}
     ;;
 
   prerelease_staging)
