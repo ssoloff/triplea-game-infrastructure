@@ -24,7 +24,7 @@ PRERELEASE_LOBBY_PORT="7000"
 case "$(hostname)" in
   bot15_newark_nj)
     ${BOT} \
-      --bot-name CA_USA \
+      --bot-name NEWARK_NJ \
       --bot-port 8000 \
       --bot-start-number 1 \
       --bot-count 5 \
@@ -57,7 +57,7 @@ case "$(hostname)" in
     ;;
   bot45_atlanta_ga)
     ${BOT} \
-      --bot-name FRANKFURT_DE \
+      --bot-name ATLANTA_GA \
       --bot-port 8000 \
       --bot-start-number 4 \
       --bot-count 5 \
@@ -68,7 +68,7 @@ case "$(hostname)" in
     ;;
   bot55_london_uk)
     ${BOT} \
-      --bot-name FRANKFURT_DE \
+      --bot-name LONDON_UK \
       --bot-port 8000 \
       --bot-start-number 5 \
       --bot-count 5 \
@@ -77,6 +77,18 @@ case "$(hostname)" in
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${RELEASE_VERSION}
     ;;
+  bot65_tokyo_jp)
+    ${BOT} \
+      --bot-name TOKYO_JP \
+      --bot-port 8000 \
+      --bot-start-number 5 \
+      --bot-count 5 \
+      --max-memory 128 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
+      --tag-name ${RELEASE_VERSION}
+    ;;
+
   prerelease_staging)
     ${LOBBY_DB} \
        --database-port 5432 \
