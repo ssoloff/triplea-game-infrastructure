@@ -35,8 +35,8 @@ case "$(hostname)" in
       --bot-start-number 1 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY} \
       --tag-name ${PROD_VERSION}
     ;;
   bot25_ca_usa)
