@@ -44,6 +44,17 @@ case "$(hostname)" in
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_RELEASE}
     ;;
+  bot45_atlanta_ga)
+    ${BOT} \
+      --bot-name FRANKFURT_DE \
+      --bot-port 8000 \
+      --bot-start-number 3 \
+      --bot-count 5 \
+      --max-memory 128 \
+      --lobby-port ${PRERELEASE_LOBBY_PORT} \
+      --lobby-host ${PRERELEASE_LOBBY} \
+      --tag-name ${LATEST_RELEASE}
+    ;;
   prerelease_staging)
     ${LOBBY_DB} \
        --database-port 5432 \
@@ -55,7 +66,7 @@ case "$(hostname)" in
     ${BOT} \
       --bot-name prerelease \
       --bot-port 8000 \
-      --bot-start-number 3 \
+      --bot-start-number 9 \
       --bot-count 1 \
       --max-memory 128 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
