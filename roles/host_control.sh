@@ -27,8 +27,8 @@ case "$(hostname)" in
       --bot-name CA_USA \
       --bot-port 8000 \
       --bot-start-number 1 \
-      --bot-count 3 \
-      --max-memory 256 \
+      --bot-count 5 \
+      --max-memory 128 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_RELEASE}
