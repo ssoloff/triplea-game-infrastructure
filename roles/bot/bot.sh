@@ -25,7 +25,10 @@ while [ "$1" != "" ]; do
       LOBBY_HOST=${VALUE}
       ;;
     --tag-name)
-      TAG_NAME="$2"
+      TAG_NAME=${VALUE}
+      ;;
+    --max-memory)
+      MAX_MEMORY=${VALUE}
       ;;
      *)
       echo "ERROR: unknown parameter \"${PARAM}\""
@@ -45,6 +48,7 @@ checkArg BOT_COUNT ${BOT_COUNT}
 checkArg TAG_NAME ${TAG_NAME}
 checkArg LOBBY_PORT ${LOBBY_PORT}
 checkArg LOBBY_HOST ${LOBBY_HOST}
+checkArg MAX_MEMORY ${MAX_MEMORY}
 
 mkdir -p /home/triplea/bots/
 INSTALL_FOLDER=/home/triplea/bots/${TAG_NAME}
@@ -61,7 +65,8 @@ fi
   ${BOT_NAME} \
   ${INSTALL_FOLDER} \
   ${LOBBY_HOST} \
-  ${LOBBY_PORT}
+  ${LOBBY_PORT} \
+  ${MAX_MEMORY}
 
 
 /root/infrastructure/roles/bot/tasks/update_maps.sh

@@ -19,6 +19,9 @@ while [ "$1" != "" ]; do
     --lobby-host)
       LOBBY_HOST=${VALUE}
       ;;
+    --max-memory)
+      MAX_MEMORY=${VALUE}
+      ;;
      *)
       echo "ERROR: unknown parameter \"${PARAM}\""
       exit 1
@@ -30,16 +33,17 @@ done
 
 set -eu
 
-BOT_FULL_NAME="Bot${BOT_NUMBER}_${BOT_NAME}" ## must start with "Bot"
+BOT_FULL_NAME="${BOT_NAME}" ## must start with "Bot"
 COMMENT="automated_host ${BOT_NUMBER}" ## must contain "automated_host"
 
-if [[ -z "${BOT_PORT}" || -z "${BOT_NUMBER}" || -z "{$BOT_NAME}" || -z "${LOBBY_HOST}" || -z "${LOBBY_PORT}" ]]; then
- echo "Usage: $(basename $0) --bot-number 2 --botbot_port bot_number bot_name lobby_host lobby_port"
+if [[ -z "${BOT_PORT}" || -z "${BOT_NUMBER}" || -z "{$BOT_NAME}" || -z "${LOBBY_HOST}" \
+    || -z "${LOBBY_PORT}" || -z "${MAX_MEMORY}" ]]; then
+ echo "Missing parameter in: $@"
  exit 1
 fi
 
 cd "$(dirname $0)"
-java -server -Xmx320m -Djava.awt.headless=true -classpath "bin/*" \
+java -server -Xmx${MAX_MEMORY}m -Djava.awt.headless=true -classpath "bin/*" \
     games.strategy.engine.framework.headlessGameServer.HeadlessGameServer \
     -Ptriplea.game.host.console=false \
     -Ptriplea.game= \

@@ -29,6 +29,7 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 25 \
       --bot-count 3 \
+      --max-memory 320 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_RELEASE}
@@ -46,6 +47,7 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 30 \
       --bot-count 2 \
+      --max-memory 320 \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}

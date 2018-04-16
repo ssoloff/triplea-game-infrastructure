@@ -12,6 +12,7 @@ BOT_NAME=$5
 INSTALL_FOLDER=$6
 LOBBY_HOST=$7
 LOBBY_PORT=$8
+MAX_MEMORY=$9
 
 set -eu
 
@@ -44,7 +45,7 @@ Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
 Environment=
 WorkingDirectory=${installFolder}
 User=triplea
-ExecStart=${installFolder}/run_bot.sh --bot-port 40%i --bot-number %i --bot-name ${botActualName} --lobby-host ${lobbyHost} --lobby-port ${lobbyPort}
+ExecStart=${installFolder}/run_bot.sh --max-memory ${MAX_MEMORY} --bot-port 40%i --bot-number %i --bot-name ${botActualName} --lobby-host ${lobbyHost} --lobby-port ${lobbyPort}
 Restart=always
 
 [Install]
