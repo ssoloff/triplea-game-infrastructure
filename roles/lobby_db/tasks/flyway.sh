@@ -46,4 +46,4 @@ chown -R triplea:triplea /home/triplea/
 ${FLYWAY_FOLDER}/flyway migrate
 
 SCHEMA=$(${FLYWAY_FOLDER}/flyway info | grep "Schema version")
-report "Database at: ${SCHEMA}; tag: ${TAG_NAME}"
+report "DB ${SCHEMA}; tag: ${TAG_NAME}"

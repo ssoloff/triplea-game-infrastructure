@@ -25,7 +25,7 @@ PRERELEASE_LOBBY_PORT="7000"
 case "$(hostname)" in
   bot25_ca)
     ${BOT} \
-      --bot-name bot25_ca \
+      --bot-name CA_USA \
       --bot-port 8000 \
       --bot-start-number 25 \
       --bot-count 3 \

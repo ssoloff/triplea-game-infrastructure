@@ -15,14 +15,13 @@ LOBBY_PORT=$8
 
 set -eu
 
-checkArg BOT_PORT ${BOT_PORT}
-
+checkArg LOBBY_PORT ${LOBBY_PORT}
 BOT_FILE_ROOT="/root/infrastructure/roles/bot/files"
 
 checkFolder ${BOT_FILE_ROOT}
 
 function main() {
-  installServiceFile ${INSTALL_FOLDER} ${BOT_NAME} ${LOBBY_HOST} ${LOBBY_PORT}
+  installServiceFile ${INSTALL_FOLDER} ${BOT_NAME} ${LOBBY_HOST} ${LOBBY_PORT} ${BOT_START_NUMBER}
   installRunAndUninstallFiles
   createStartStopScripts ${BOT_COUNT}
 }
@@ -33,7 +32,9 @@ function installServiceFile() {
   local botName=$2
   local lobbyHost=$3
   local lobbyPort=$4
+  local startNumber=$5
 
+  local botActualName="Bot${startNumber}%i_${botName}"
   cat > /lib/systemd/system/triplea-bot@.service <<EOF
 [Unit]
 Description=TripleA Bot %i
@@ -43,7 +44,7 @@ Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
 Environment=
 WorkingDirectory=${installFolder}
 User=triplea
-ExecStart=${installFolder}/run_bot.sh --bot-port 40%i --bot-number %i --bot-name ${botName} --lobby-host ${lobbyHost} --lobby-port ${lobbyPort}
+ExecStart=${installFolder}/run_bot.sh --bot-port 40%i --bot-number %i --bot-name ${botActualName} --lobby-host ${lobbyHost} --lobby-port ${lobbyPort}
 Restart=always
 
 [Install]
@@ -65,7 +66,7 @@ function createStartStopScripts() {
   rm -f /home/triplea/start_all /home/triplea/stop_all
 
   for i in $(seq -w 01 ${botCount}); do
-    local botNumber=$((BOT_START_NUMBER + i))
+    local botNumber=${i}
     local botPort="40${botNumber}"
 
     ufw allow ${botPort}
