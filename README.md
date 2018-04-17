@@ -1,24 +1,100 @@
 # Infrastructure
 
+## Overview 
 
-- cron does an update of the deployed infrastructure code by removing the infrastructure folder and creating a 
-  new clone.
-  
+Text based configuration for servers, we check in changes here, servers download this repo every
+ 5 minutes and run the update script, which will pick up any changes we check in.
+ 
+ Update is divided into two logic pieces, system and host. The system are universal items, all servers
+ run this first as part of update. Second is host, this is basically a script that is a switch statement
+ with all the server hostnames, each server uses the hostname command to lookup it's name in this script and
+ then executes the corresponding steps.
+
+
+## Notifications
+
+At a high level we have the gitter activity feed which is sending a constant yes/no result when the 
+update cronjob kicks in, this is every 5 minutes. Each 
+
+
 
 # First time setup
 
+To get a host configured we need:
+1. linode server and a hostname for it
+1. an entry in the infrastructure control file: `host_control.sh`.
+1. one-time install of the update cronjob on the linode
+1. reboot of the server so the hostname is updated
+
+
+## Update host-control
+
+* [host_control.sh](https://github.com/triplea-game/infrastructure/blob/master/roles/host_control.sh)
+
+The script file is a glorified switch statement, each machine executes the file and uses `hostname` to know which
+specific instructions to run. File updates that are merged to master will be available to live production on each
+machines next update cycle (every 5 minutes)
+
+
+## Create Server in Linode
+- Add a new linode, select plan with best price per megabyte of RAM; this tends to be the 1GB nano instances, $5 per month
+- use largest swap disk available (for now.. helps avoid OS reaper process which can kill the bot when 
+system runs low and near out of memory)
+- ubuntu OS 17 or better
+
+'boot' the linode, should be in a running state.
+
+## Prepare install script
+
+Prepare the following script somewhere locally:
 ```
 MY_HOST=[hostname]
 PAPERTRAIL_TOKEN=[paperTrailToken]
 curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh" | bash -s $MY_HOST $PAPERTRAIL_TOKEN
 ```
+- replace `[hostname]` with the same host name added to `host_control.sh` in the previous step
+- `[paperTrailToken]` is universal and always the same value, it can be grabbed from any running
+machine under infrastructure from the file: `/home/triplea/secrets`
 
-Create secrets file: `/home/triplea/secrets`
-Applications that use database will need additional secrets for DB connectivity, otherwise we just have
-the papertrail tokens.
+
+## Boot server and run install script
+
+SSH to the server via command line using `root@IP`, use the password specified during setup. Next copy/paste
+and run the `curl` script previously prepared. Next, log out, and reboot the server from linode so that the hostname 
+update would take effect. You're done : )  
+
+When the update job kicks in after reboot SSH keys will be copied and necessary software will be installed and started.
 
 
-## Verify Setup
+# The 3 Parts to Infrastructure configuration: the update task, system control and host control
+
+## The Update task
+
+The update job is responsible to remove the last cloned* version of infrastructure to a clone a new one. We then
+run the update job `update_cron.sh`. This job is largely static, it is responsible for redirecting output to the 
+correct locations, and to kick off system and host control.
+
+*cloning: I noticed that github can buffer files for quite some time when doing 'curl' downloads. To ensure we get 
+the very latest values a fresh clone is done.
+
+
+## System Control
+
+This is the initial entry point of update execution and here we install the system level
+common components, things like: firewall, apt packages, common triplea user, admin ssh keys
+
+
+
+## Host Control
+
+- maps hostnames to their update instructions, basically a glorified switch statement where
+each host uses `hostname` to determine which entry to execute.
+- this is the file that decides which hosts will have bot software, which will have lobby
+
+
+
+
+# How to Verify 
 Things to notice and check:
 * 'infrastructure' folder: `ls /root/`
 * `crontab -l` should have a cron installed
@@ -74,38 +150,8 @@ SSH to the machine and run cron job by hand, to view the cron jobs:
 crontab -l
 ```
 
-# Setup & Configuration
 
-After we create a linode server and give it a hostname and cron, we can then manage it by adding an entry
-to the infrastructure control file: `system_control.sh`.
+# Overwrite vs write-once Philosophy
+- configuration files are written every time, this way updates will be applied to live server
+- binary files that should never change are written once the first time only.
 
-
-## Infrastructure Control File
-
-- Single file that drives infrastructure configuration, maps hostnames to their update instructions
-- script will do core setup and install if not yet done
-- script will finish by executing 'role' specific install or update; this is done by matching
-hostname with a switch statement, the switch statement will have the appropriate update command
-configured with parameters.
-
-
-# Gitter integration
-
-Hosts will send their activity messages to a gitter chat, by watching this we can see message like:
-
-```
-bot_california_01 is starting initial install
-bot_california_01 is starting initial install
-bot_california_01 is installed
-bot_california_01 is starting update to 1.9.0.0.1511
-bot_california_01 completed update to 1.9.0.0.1511
-bot_california_01 is startign...
-bot_california_01 has updated [n] maps.
-
-lobby_prerelease is starting update to 1.9.0.0.1511
-lobby_prerelease completed update to 1.9.0.0.1511
-```
-
-# Overwrite vs write-once
--> all configurations and service files should be overwritten every time
--> binary files that are not expected to change can be write once
