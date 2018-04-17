@@ -130,9 +130,6 @@ function installUser() {
   local user=$1
 
   grep -q ${user} /etc/passwd || adduser --disabled-password --gecos "" ${user}
-  grep -q "^${user}" /etc/sudoers || echo "${user} ALL=(ALL) /usr/sbin/service ${user}" >> /etc/sudoers
-  grep -q "^${user}.*htop" /etc/sudoers || echo "${user} ALL=(ALL) /usr/bin/htop*" >> /etc/sudoers
-  grep -q "^${user}.*iftop" /etc/sudoers || echo "${user} ALL=(ALL) /usr/bin/iftop" >> /etc/sudoers
 
   mkdir -p /home/${user}/.ssh
   cat /root/infrastructure/root/files/triplea_user_authorized_keys \
