@@ -62,7 +62,7 @@ function installRunAndUninstallFiles() {
 function createStartStopScripts() {
   local botCount=$1
 
-  rm -f /home/triplea/start_all /home/triplea/stop_all
+  rm -f /home/triplea/start_all /home/triplea/stop_all /home/triplea/restart_all
 
   for i in $(seq -w 01 ${botCount}); do
     local botNumber=${i}
@@ -71,10 +71,8 @@ function createStartStopScripts() {
     ufw allow ${botPort}
 
     systemctl enable triplea-bot@${botNumber}
-    echo "sudo service triplea-bot@${botNumber} start" > /home/triplea/start_bot_${botNumber}
     echo "sudo service triplea-bot@${botNumber} restart" > /home/triplea/restart_bot_${botNumber}
-    echo "sudo service triplea-bot@${botNumber} stop" > /home/triplea/stop_bot_${botNumber}
-
+    echo "sudo service triplea-bot@${botNumber} restart" >> /home/triplea/restart_all
     echo "sudo service triplea-bot@${botNumber} start" >> /home/triplea/start_all
     echo "sudo service triplea-bot@${botNumber} stop" >> /home/triplea/stop_all
   done
