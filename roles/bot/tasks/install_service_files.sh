@@ -77,8 +77,8 @@ function createStartStopScripts() {
     echo "sudo service triplea-bot@${botNumber} stop" >> /home/triplea/stop_all
   done
   ufw reload
-  chmod +x /home/triplea/stop_bot* /home/triplea/start_bot* /home/triplea/restart_bot*
-  chmod +x /home/triplea/start_all /home/triplea/stop_all
+  chmod +x /home/triplea/restart_bot*
+  chmod +x /home/triplea/start_all /home/triplea/stop_all /home/triplea/restart_all
 }
 
 main
