@@ -12,3 +12,5 @@ fi
 service metrics status | grep "Active: active"  || reportError "Metrics not running, run: 'service metrics status'"
 
 checkFile ${SECRET_FILE}
+
+ufw status | grep -q "Status: inactive" && reportError "UFW not running"
