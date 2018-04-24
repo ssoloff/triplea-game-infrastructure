@@ -57,4 +57,4 @@ checkServiceIsRunning triplea-lobby
 
 checkPortIsOpen ${PORT}
 
-chwon -R triplea:triplea /home/triplea
+chown -R triplea:triplea /home/triplea
