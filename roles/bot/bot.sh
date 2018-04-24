@@ -53,10 +53,6 @@ checkArg MAX_MEMORY ${MAX_MEMORY}
 mkdir -p /home/triplea/bots/
 INSTALL_FOLDER=/home/triplea/bots/${TAG_NAME}
 
-if [ ! -d "${INSTALL_FOLDER}" ]; then
-  /root/infrastructure/roles/bot/tasks/install_binaries.sh ${TAG_NAME}
-fi
-
 /root/infrastructure/roles/bot/tasks/install_service_files.sh \
   ${BOT_START_NUMBER} \
   ${BOT_COUNT} \
@@ -66,6 +62,12 @@ fi
   ${LOBBY_PORT} \
   ${MAX_MEMORY}
 
+if [ ! -d "${INSTALL_FOLDER}" ]; then
+  /root/infrastructure/roles/bot/tasks/install_binaries.sh ${TAG_NAME}
+  for i in $(seq -w 01 ${BOT_COUNT}); do
+    service triplea-bot@${i} restart
+  done
+fi
 
 /root/infrastructure/roles/bot/tasks/update_maps.sh
 
