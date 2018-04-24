@@ -26,14 +26,13 @@ BOT_MEMORY=168
 PROD_VERSION="1.9.0.0.10104"
 PROD_LOBBY_IP="45.79.144.53"
 PROD_LOBBY_PORT="3304"
-PROD_DB_VERSION="1.9.0.0.10104"
 PROD_LOBBY_VERSION="1.9.0.0.7621"
 
 case "$(hostname)" in
   tripleawarclub)
     ${LOBBY_DB} \
        --database-port 5432 \
-       --tag-name ${PROD_DB_VERSION}
+       --tag-name ${PROD_VERSION}
     ${LOBBY} \
        --lobby-port 3304 \
        --database-port 5432 \
@@ -42,7 +41,7 @@ case "$(hostname)" in
   prerelease_staging)
     ${LOBBY_DB} \
        --database-port 5432 \
-       --tag-name ${PROD_DB_VERSION}
+       --tag-name ${PROD_VERSION}
     ${LOBBY} \
        --lobby-port 7000 \
        --database-port 5432 \
