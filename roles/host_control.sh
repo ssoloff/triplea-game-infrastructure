@@ -24,85 +24,29 @@ BOT_COUNT=4
 BOT_MEMORY=168
 
 PROD_VERSION="1.9.0.0.10104"
-PROD_LOBBY="45.79.144.53"
+PROD_LOBBY_IP="45.79.144.53"
 PROD_LOBBY_PORT="3304"
+PROD_DB_VERSION="1.9.0.0.7621"
+PROD_LOBBY_VERSION="1.9.0.0.7621"
 
 case "$(hostname)" in
-  bot15_newark_nj)
-    ${BOT} \
-      --bot-name NEWARK_NJ \
-      --bot-port 8000 \
-      --bot-start-number 1 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
-      --tag-name ${PROD_VERSION}
+  tripleawarclub)
+    ${LOBBY_DB} \
+       --database-port 5432 \
+       --tag-name ${PROD_DB_VERSION}
+    ${LOBBY} \
+       --lobby-port 3304 \
+       --database-port 5432 \
+       --tag-name ${PROD_LOBBY_VERSION}
     ;;
-  bot25_ca_usa)
-    ${BOT} \
-      --bot-name CA_USA \
-      --bot-port 8000 \
-      --bot-start-number 2 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot35_frankfurt_de)
-    ${BOT} \
-      --bot-name FRANKFURT_DE \
-      --bot-port 8000 \
-      --bot-start-number 3 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot45_atlanta_ga)
-    ${BOT} \
-      --bot-name ATLANTA_GA \
-      --bot-port 8000 \
-      --bot-start-number 4 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot55_london_uk)
-    ${BOT} \
-      --bot-name LONDON_UK \
-      --bot-port 8000 \
-      --bot-start-number 5 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot65_tokyo_jp)
-    ${BOT} \
-      --bot-name TOKYO_JP \
-      --bot-port 8000 \
-      --bot-start-number 6 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY} \
-      --tag-name ${PROD_VERSION}
-    ;;
-
   prerelease_staging)
     ${LOBBY_DB} \
        --database-port 5432 \
-       --tag-name ${LATEST_TAG}
+       --tag-name ${PROD_DB_VERSION}
     ${LOBBY} \
        --lobby-port 7000 \
        --database-port 5432 \
-       --tag-name ${LATEST_TAG}
+       --tag-name ${PROD_LOBBY_VERSION}
     ${BOT} \
       --bot-name prerelease \
       --bot-port 8000 \
@@ -113,6 +57,74 @@ case "$(hostname)" in
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
     ;;
+  bot15_newark_nj)
+    ${BOT} \
+      --bot-name NEWARK_NJ \
+      --bot-port 8000 \
+      --bot-start-number 1 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+  bot25_ca_usa)
+    ${BOT} \
+      --bot-name CA_USA \
+      --bot-port 8000 \
+      --bot-start-number 2 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+  bot35_frankfurt_de)
+    ${BOT} \
+      --bot-name FRANKFURT_DE \
+      --bot-port 8000 \
+      --bot-start-number 3 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+  bot45_atlanta_ga)
+    ${BOT} \
+      --bot-name ATLANTA_GA \
+      --bot-port 8000 \
+      --bot-start-number 4 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+  bot55_london_uk)
+    ${BOT} \
+      --bot-name LONDON_UK \
+      --bot-port 8000 \
+      --bot-start-number 5 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+  bot65_tokyo_jp)
+    ${BOT} \
+      --bot-name TOKYO_JP \
+      --bot-port 8000 \
+      --bot-start-number 6 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+
+
   infra-support)
     ${PROMETHEUS}
     ${GRAFANA}
