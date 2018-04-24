@@ -56,3 +56,5 @@ sleep 3
 checkServiceIsRunning triplea-lobby
 
 checkPortIsOpen ${PORT}
+
+chwon -R triplea:triplea /home/triplea
