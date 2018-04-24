@@ -93,7 +93,7 @@ function checkArg() {
 function checkServiceIsRunning() {
   local serviceName=$1
   service "${serviceName}" status | grep "Active: active"  \
-      || reportError"${serviceName} is NOT running"
+      || reportError "${serviceName} is NOT running"
 }
 
 
