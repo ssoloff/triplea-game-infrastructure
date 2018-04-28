@@ -50,28 +50,39 @@ checkArg LOBBY_PORT ${LOBBY_PORT}
 checkArg LOBBY_HOST ${LOBBY_HOST}
 checkArg MAX_MEMORY ${MAX_MEMORY}
 
+
+function installService() {
+  /root/infrastructure/roles/bot/tasks/install_service_files.sh \
+    ${BOT_START_NUMBER} \
+    ${BOT_COUNT} \
+    ${BOT_NAME} \
+    ${INSTALL_FOLDER} \
+    ${LOBBY_HOST} \
+    ${LOBBY_PORT} \
+    ${MAX_MEMORY}
+}
+
+function installBinaries() {
+  /root/infrastructure/roles/bot/tasks/install_binaries.sh ${TAG_NAME}
+}
+
 mkdir -p /home/triplea/bots/
 INSTALL_FOLDER=/home/triplea/bots/${TAG_NAME}
 
-/root/infrastructure/roles/bot/tasks/install_service_files.sh \
-  ${BOT_START_NUMBER} \
-  ${BOT_COUNT} \
-  ${BOT_NAME} \
-  ${INSTALL_FOLDER} \
-  ${LOBBY_HOST} \
-  ${LOBBY_PORT} \
-  ${MAX_MEMORY}
-
 if [ ! -d "${INSTALL_FOLDER}" ]; then
-  /root/infrastructure/roles/bot/tasks/install_binaries.sh ${TAG_NAME}
+  installBinaries
+  installService
+  chown -R triplea:triplea /home/triplea
   for i in $(seq -w 01 ${BOT_COUNT}); do
     service triplea-bot@${i} restart
   done
+else
+  installService
 fi
 
 /root/infrastructure/roles/bot/tasks/update_maps.sh
-
 chown -R triplea:triplea /home/triplea
+
 for i in $(seq -w 01 ${BOT_COUNT}); do
   service triplea-bot@${i} start
 done
