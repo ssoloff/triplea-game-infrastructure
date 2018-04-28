@@ -129,7 +129,7 @@ function readSecret () {
 function installUser() {
   local user=$1
 
-  grep -q ${user} /etc/passwd || adduser --disabled-password --gecos "" ${user}
+  grep -q "^${user}" /etc/passwd || adduser --disabled-password --gecos "" ${user}
 
   mkdir -p /home/${user}/.ssh
   cat /root/infrastructure/root/files/root_user_authorized_keys > /home/${user}/.ssh/authorized_keys
