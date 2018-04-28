@@ -132,8 +132,7 @@ function installUser() {
   grep -q ${user} /etc/passwd || adduser --disabled-password --gecos "" ${user}
 
   mkdir -p /home/${user}/.ssh
-  cat /root/infrastructure/root/files/triplea_user_authorized_keys \
-      /root/infrastructure/root/files/root_user_authorized_keys > /home/${user}/.ssh/authorized_keys
+  cat /root/infrastructure/root/files/root_user_authorized_keys > /home/${user}/.ssh/authorized_keys
   chmod 644 /home/${user}/.ssh/authorized_keys
 }
 

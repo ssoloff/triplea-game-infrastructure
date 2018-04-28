@@ -139,8 +139,11 @@ To generate a key, kindly use ed25519, generates a short and very powerful encry
 
 ## Add Key
 Submit PR and add key to one of:
-- super-admin (root user): https://github.com/triplea-game/infrastructure/blob/master/root/files/root_user_authorized_keys
-- basic-admin (triplea user): https://github.com/triplea-game/infrastructure/blob/master/root/files/triplea_user_authorized_keys
+- Admin user (read-access): https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys
+- Root user (write-access): https://github.com/triplea-game/infrastructure/blob/master/root/files/root_user_authorized_keys
+
+'read-access' can be given more liberally and is useful for checking logs and restarting bots, write access is reserved 
+for the (volunteer) linux system admins.
 
 
 # Test and Manual Trigger
