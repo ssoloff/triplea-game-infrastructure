@@ -1,5 +1,5 @@
 
-GITTER_TEST_ROOM="https://webhooks.gitter.im/e/21367d2247fd87a9255b"
+GITTER_TEST_ROOM="https://webhooks.gitter.im/e/6233b12b35a05b5f7810"
 
 SECRET_FILE="/home/triplea/secrets"
 

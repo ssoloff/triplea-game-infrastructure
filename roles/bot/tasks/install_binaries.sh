@@ -9,13 +9,14 @@ TAG_NAME=$1
 set -eu
 
 function main() {
-  mkdir -p /home/triplea/bots/
+  report "Installing bot version: ${TAG_NAME}"
+  local installPath="/home/triplea/bots/${TAG_NAME}"
+  mkdir -p ${installPath}
 
   local installerFile="triplea-${TAG_NAME}.zip"
   rm -f "${installerFile}"
   downloadBinaries "${installerFile}"
 
-  local installPath="/home/triplea/bots/${TAG_NAME}"
   unzip -d "${installPath}" "${installerFile}"
 
   echo "${TAG_NAME}" > "${installPath}/version"
