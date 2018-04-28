@@ -10,6 +10,7 @@ installUser ${USER_NAME}
 
 cat /root/infrastructure/root/files/admin_user_authorized_keys >> /home/${USER_NAME}/.ssh/authorized_keys
 chmod 644 /home/${USER_NAME}/.ssh/authorized_keys
+chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/
 
 ## enable sudoer permissions
 
@@ -31,3 +32,4 @@ egrep -q "^${USER_NAME}.*triplea-lobby" /etc/sudoers || echo "${USER_NAME} ALL=(
 egrep -q "^${USER_NAME}.*journalctl" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service journalctl" >> /etc/sudoers
 egrep -q "^${USER_NAME}.*htop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/bin/htop" >> /etc/sudoers
 egrep -q "^${USER_NAME}.*iftop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/bin/iftop" >> /etc/sudoers
+
