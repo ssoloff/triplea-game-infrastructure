@@ -2,6 +2,7 @@
 
 . /root/infrastructure/common.sh
 
+set -x
 sshConf="/etc/ssh/sshd_config"
 
 function turnOffPasswords() {
