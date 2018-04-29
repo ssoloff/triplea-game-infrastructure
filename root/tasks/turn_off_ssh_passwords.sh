@@ -13,6 +13,7 @@ function turnOffPasswords() {
 function checkConfigAndTurnOff() {
   local token="$1"
   local offToken="$2"
+  local sshConf="/etc/ssh/sshd_config"
 
   grep -q "${token}" ${sshConf} && \
      turnOffPasswordConfig "${token}" "${offToken}"
@@ -21,6 +22,7 @@ function checkConfigAndTurnOff() {
 function turnOffPasswordConfig() {
   local token="$1"
   local offToken="$2"
+  local sshConf="/etc/ssh/sshd_config"
   sed -i "s/${token}/${offToken}/" ${sshConf}
   systemctl reload ssh
 }
