@@ -28,4 +28,4 @@ function turnOffPasswordConfig() {
   systemctl reload ssh
 }
 
-turnOffPasswords || return
+turnOffPasswords || exit 0
