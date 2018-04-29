@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eu
-
 . /root/infrastructure/common.sh
 
 sshConf="/etc/ssh/sshd_config"
