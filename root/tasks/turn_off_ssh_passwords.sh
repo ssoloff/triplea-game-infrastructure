@@ -2,7 +2,7 @@
 
 . /root/infrastructure/common.sh
 
-set -x
+set -eux
 sshConf="/etc/ssh/sshd_config"
 
 function turnOffPasswords() {
@@ -16,8 +16,8 @@ function checkConfigAndTurnOff() {
   local offToken="$2"
   local sshConf="/etc/ssh/sshd_config"
 
-  grep -q "${token}" ${sshConf} && \
-     turnOffPasswordConfig "${token}" "${offToken}"
+  (grep -q "${token}" ${sshConf} && \
+     turnOffPasswordConfig "${token}" "${offToken}")
 }
 
 function turnOffPasswordConfig() {
@@ -28,4 +28,4 @@ function turnOffPasswordConfig() {
   systemctl reload ssh
 }
 
-turnOffPasswords
+turnOffPasswords || return
