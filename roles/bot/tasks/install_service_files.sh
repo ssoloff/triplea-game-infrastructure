@@ -44,7 +44,7 @@ Environment=
 WorkingDirectory=${installFolder}
 User=triplea
 ExecStart=${installFolder}/run_bot.sh --max-memory ${MAX_MEMORY} --bot-port 40%i --bot-number %i --bot-name ${botActualName} --lobby-host ${lobbyHost} --lobby-port ${lobbyPort}
-Restart=always
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
