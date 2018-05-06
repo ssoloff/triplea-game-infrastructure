@@ -63,7 +63,11 @@ function createStartStopScripts() {
   local botCount=$1
 
   rm -f /home/triplea/start_all /home/triplea/stop_all /home/triplea/restart_all
+  rm -f /home/triplea/stop_bot* /home/triplea/start_bot* /home/triplea/restart_bot*
 
+  rm -f /home/admin/restart_bot*
+  rm -f /home/admin/start_all /home/admin/stop_all /home/admin/restart_all
+  
   for i in $(seq -w 01 ${botCount}); do
     local botNumber=${i}
     local botPort="40${botNumber}"
@@ -71,14 +75,14 @@ function createStartStopScripts() {
     ufw allow ${botPort}
 
     systemctl enable triplea-bot@${botNumber}
-    echo "sudo service triplea-bot@${botNumber} restart" > /home/triplea/restart_bot_${botNumber}
-    echo "sudo service triplea-bot@${botNumber} restart" >> /home/triplea/restart_all
-    echo "sudo service triplea-bot@${botNumber} start" >> /home/triplea/start_all
-    echo "sudo service triplea-bot@${botNumber} stop" >> /home/triplea/stop_all
+    echo "sudo service triplea-bot@${botNumber} restart" > /home/admin/restart_bot_${botNumber}
+    echo "sudo service triplea-bot@${botNumber} restart" >> /home/admin/restart_all
+    echo "sudo service triplea-bot@${botNumber} start" >> /home/admin/start_all
+    echo "sudo service triplea-bot@${botNumber} stop" >> /home/admin/stop_all
   done
   ufw reload
-  chmod +x /home/triplea/restart_bot*
-  chmod +x /home/triplea/start_all /home/triplea/stop_all /home/triplea/restart_all
+  chmod +x /home/admin/restart_bot*
+  chmod +x /home/admin/start_all /home/admin/stop_all /home/admin/restart_all
 }
 
 main
