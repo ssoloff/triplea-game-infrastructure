@@ -126,10 +126,15 @@ copy of logs are in:
 ***TODO*** make sure we have all logs going to all locations, std error might be missing from one of these log streams
 
 
+# Users and User Policy
 
-# Adding SSH Keys
+- `triplea` this was previously the goto user for everyone, this is now an 'application-only' user. We run the triplea application as this user, but otherwise do not log in as this user.
+- `admin` this is the new goto user for doing anything on the servers. Ideally it is really rare that we need to log in to servers, and when we do there should be a feature request ticket somewhere asking for that use-case to be automated. If the admin account can't do something, please update the infrastructure scripts to grant it, and then perform that action as admin. Do *not* logout and back in as root, fix the infrastructure scripts instead.
+- `root` essentially should not be used. Any root level commands should be done via infrastructure scripts. Use this account as a last restort, probably only when some sort of mistake needs to be corrected.
 
-## Generate SSH key:
+## Adding SSH Keys
+
+### Generate SSH key:
 
 To generate a key, kindly use ed25519, generates a short and very powerful encryption key:
 ```
@@ -137,13 +142,10 @@ To generate a key, kindly use ed25519, generates a short and very powerful encry
  eg: ssh-keygen -o -a 100 -t ed25519 -C joe@alien-laptop
 ```
 
-## Add Key
-Submit PR and add key to one of:
+### Add Key
+Submit PR to add key to:
 - Admin user (read-access): https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys
-- Root user (write-access): https://github.com/triplea-game/infrastructure/blob/master/root/files/root_user_authorized_keys
 
-'read-access' can be given more liberally and is useful for checking logs and restarting bots, write access is reserved 
-for the (volunteer) linux system admins.
 
 
 # Test and Manual Trigger
