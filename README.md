@@ -143,10 +143,9 @@ To generate a key, kindly use ed25519, generates a short and very powerful encry
 ```
 
 ### Add Key
-Submit PR to add key to:
-- Admin user (read-access): https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys
+Submit PR to add key to: https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys
 
-
+After the PR is merged and given 5 minutes for the update to take effect on servers, you can then log in to any server with `ssh admin@<server_ip>`
 
 # Test and Manual Trigger
 
