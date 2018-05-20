@@ -19,6 +19,7 @@ LATEST_TAG=$(grep ${LATEST_BUILD} $TEMP_FILE | sed 's/.* "//' | sed 's/".*$//')
 
 PRERELEASE_LOBBY="66.175.213.79"
 PRERELEASE_LOBBY_PORT="7000"
+PRERELEASE_BOT_MEMORY=128
 
 BOT_COUNT=4
 BOT_MEMORY=168
@@ -51,7 +52,7 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 9 \
       --bot-count 1 \
-      --max-memory ${BOT_MEMORY} \
+      --max-memory ${PRERELEASE_BOT_MEMORY} \
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
