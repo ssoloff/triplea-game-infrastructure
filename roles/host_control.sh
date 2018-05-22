@@ -33,7 +33,7 @@ case "$(hostname)" in
   tripleawarclub)
     ${LOBBY_DB} \
        --database-port 5432 \
-       --tag-name ${PROD_VERSION}
+       --tag-name ${PROD_LOBBY_VERSION}
     ${LOBBY} \
        --lobby-port 3304 \
        --database-port 5432 \
@@ -42,11 +42,11 @@ case "$(hostname)" in
   prerelease_staging)
     ${LOBBY_DB} \
        --database-port 5432 \
-       --tag-name ${PROD_VERSION}
+       --tag-name ${LATEST_TAG}
     ${LOBBY} \
        --lobby-port 7000 \
        --database-port 5432 \
-       --tag-name ${PROD_LOBBY_VERSION}
+       --tag-name ${LATEST_TAG}
     ${BOT} \
       --bot-name prerelease \
       --bot-port 8000 \
