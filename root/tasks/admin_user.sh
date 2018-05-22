@@ -16,10 +16,10 @@ chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/
 
 function botPermissions() {
   local botNumber=$1
-  egrep -q "^${USER_NAME}.*triplea-bot@${botNumber} restart" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} restart" >> /etc/sudoers
-  egrep -q "^${USER_NAME}.*triplea-bot@${botNumber} start" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} start" >> /etc/sudoers
-  egrep -q "^${USER_NAME}.*triplea-bot@${botNumber} stop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} stop" >> /etc/sudoers
-  egrep -q "^${USER_NAME}.*triplea-bot@${botNumber} status" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} status" >> /etc/sudoers
+  grep -E -q "^${USER_NAME}.*triplea-bot@${botNumber} restart" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} restart" >> /etc/sudoers
+  grep -E -q "^${USER_NAME}.*triplea-bot@${botNumber} start" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} start" >> /etc/sudoers
+  grep -E -q "^${USER_NAME}.*triplea-bot@${botNumber} stop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} stop" >> /etc/sudoers
+  grep -E -q "^${USER_NAME}.*triplea-bot@${botNumber} status" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-bot@${botNumber} status" >> /etc/sudoers
 }
 
 ## TODO: we have a hardcoded assumption here that we'll have 4 bots... It is a different config for how many bots there are per server.
@@ -28,8 +28,8 @@ botPermissions 02
 botPermissions 03
 botPermissions 04
 
-egrep -q "^${USER_NAME}.*triplea-lobby" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-lobby" >> /etc/sudoers
-egrep -q "^${USER_NAME}.*journalctl" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service journalctl" >> /etc/sudoers
-egrep -q "^${USER_NAME}.*htop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/bin/htop" >> /etc/sudoers
-egrep -q "^${USER_NAME}.*iftop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/bin/iftop" >> /etc/sudoers
+grep -E -q "^${USER_NAME}.*triplea-lobby" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-lobby" >> /etc/sudoers
+grep -E -q "^${USER_NAME}.*journalctl" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service journalctl" >> /etc/sudoers
+grep -E -q "^${USER_NAME}.*htop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/bin/htop" >> /etc/sudoers
+grep -E -q "^${USER_NAME}.*iftop" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/bin/iftop" >> /etc/sudoers
 

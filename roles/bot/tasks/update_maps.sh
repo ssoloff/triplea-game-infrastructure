@@ -16,7 +16,7 @@ function downloadMaps() {
 
    # note page size max is 100 (even if you specify a larger number)
    curl -sq "https://api.github.com/orgs/triplea-maps/repos?per_page=100&page=${pageNumber}" \
-      | egrep -h "html_url|updated_at" | grep -B1 "updated_at" | grep -v "^--" \
+      | grep -E -h "html_url|updated_at" | grep -B1 "updated_at" | grep -v "^--" \
       | while read line; do
 
     read last_updated_on

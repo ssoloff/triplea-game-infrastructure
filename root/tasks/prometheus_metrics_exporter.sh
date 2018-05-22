@@ -9,7 +9,7 @@ METRICS_SERVICE_FILE="/root/infrastructure/root/files/metrics-export.service"
 METRICS_FOLDER="/home/metrics/node_exporter/"
 
 installUser metrics
-egrep -q "^metrics.*metrics" /etc/sudoers || echo "metrics ALL=(ALL) /usr/sbin/service metrics" >> /etc/sudoers
+grep -E -q "^metrics.*metrics" /etc/sudoers || echo "metrics ALL=(ALL) /usr/sbin/service metrics" >> /etc/sudoers
 
 if [ ! -d "${METRICS_FOLDER}" ]; then
   ufw allow 9100
