@@ -20,9 +20,24 @@ BOT_FILE_ROOT="/root/infrastructure/roles/bot/files"
 checkFolder ${BOT_FILE_ROOT}
 
 function main() {
+  disableOldBotFiles ${BOT_COUNT}
   installServiceFile ${INSTALL_FOLDER} ${BOT_NAME} ${LOBBY_HOST} ${LOBBY_PORT} ${BOT_START_NUMBER}
   installRunAndUninstallFiles
   createStartStopScripts ${BOT_COUNT}
+}
+
+function disableOldBotFiles() {
+  systemctl reset-failed triplea-bot@*.service # Cleanup crashed, non-existent bots from systemctl list-units
+
+  local botCount=$1
+  # The regex below strips the bot number from the active service names
+  # i.e. triplea-bot@12.service -> 12
+  local installedUnits=$(systemctl list-units triplea-bot@*.service --all --no-legend | grep -Po "(?<=^triplea-bot@)\d+(?=\.service)")
+  for botNumber in installedUnits; do
+    if (( botNumber > botCount )); then
+      systemctl disable triplea-bot@$botNumber --now
+    fi
+  done
 }
 
 
@@ -67,7 +82,7 @@ function createStartStopScripts() {
 
   rm -f /home/admin/restart_bot*
   rm -f /home/admin/start_all /home/admin/stop_all /home/admin/restart_all
-  
+
   for i in $(seq -w 01 ${botCount}); do
     local botNumber=${i}
     local botPort="40${botNumber}"

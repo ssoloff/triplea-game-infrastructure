@@ -18,6 +18,7 @@ if [[ $REPLY =~ ^[Yy]$ || $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
   if [[ -f "$SERVICE_FILE" ]]; then
     service triplea-lobby stop
     systemctl disable triplea-lobby
+    systemctl reset-failed triplea-lobby.service
     rm $SERVICE_FILE
   fi
   rm "$0"

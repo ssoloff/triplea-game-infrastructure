@@ -17,6 +17,16 @@ if [[ $REPLY =~ ^[Yy]$ || $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
   SERVICE_FILE="/lib/systemd/system/triplea-bot@.service"
   if [[ -f "$SERVICE_FILE" ]]; then
     service 'triplea-bot@*' stop
+    # Clean up service file remainders
+    systemctl reset-failed triplea-bot@*.service
+
+    # Disable all bots that were ever active on this machine
+    # The regex below strips the bot number from the active service names
+    # i.e. triplea-bot@12.service -> 12
+    local installedUnits=$(systemctl list-units triplea-bot@*.service --all --no-legend | grep -Po "(?<=^triplea-bot@)\d+(?=\.service)")
+    for botNumber in installedUnits; do
+      systemctl disable triplea-bot@$botNumber
+    done
     rm $SERVICE_FILE
   fi
   rm "$0"
