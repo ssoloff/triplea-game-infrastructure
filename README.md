@@ -136,11 +136,12 @@ copy of logs are in:
 
 ### Generate SSH key:
 
-To generate a key, kindly use ed25519, generates a short and very powerful encryption key:
+Use the following to generate an ed25519 private+public key pair:
+
 ```
- ssh-keygen -o -a 100 -t ed25519 -C [user]@[machine]
- eg: ssh-keygen -o -a 100 -t ed25519 -C joe@alien-laptop
+ ssh-keygen -t ed25519
 ```
+
 
 ### Add Key
 Submit PR to add key to: https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys
