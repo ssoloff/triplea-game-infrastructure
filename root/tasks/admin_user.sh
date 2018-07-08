@@ -5,10 +5,10 @@ set -eu
 . /root/infrastructure/common.sh
 
 USER_NAME=admin
-rm -rf /home/admin
+
 installUser ${USER_NAME}
 
-cat /root/infrastructure/root/files/admin_user_authorized_keys >> /home/${USER_NAME}/.ssh/authorized_keys
+cp /root/infrastructure/root/files/admin_user_authorized_keys /home/${USER_NAME}/.ssh/authorized_keys
 chmod 644 /home/${USER_NAME}/.ssh/authorized_keys
 chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/
 
