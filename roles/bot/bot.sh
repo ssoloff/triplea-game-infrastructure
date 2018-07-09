@@ -66,25 +66,41 @@ function installBinaries() {
   /root/infrastructure/roles/bot/tasks/install_binaries.sh ${TAG_NAME}
 }
 
+function disableOldBots() {
+  /root/infrastructure/roles/bot/tasks/disable_old_bots.sh ${BOT_COUNT}
+}
+
 mkdir -p /home/triplea/bots/
 INSTALL_FOLDER=/home/triplea/bots/${TAG_NAME}
 
+## if the install folder is not present then we will install
 if [ ! -d "${INSTALL_FOLDER}" ]; then
   installBinaries
   installService
+  ## we are running as root, so let's make sure we keep perms to the triplea user
   chown -R triplea:triplea /home/triplea
+
+  ## after having done an install, call restart to launch bots to the new version
   for i in $(seq -w 01 ${BOT_COUNT}); do
     service triplea-bot@${i} restart
   done
 else
+  ## always update the service configuration scripts, even if we have already installed binaries.
   installService
 fi
 
+disableOldBots
+  
+## Download all maps for the bot.
 /root/infrastructure/roles/bot/tasks/update_maps.sh
 chown -R triplea:triplea /home/triplea
 
+## Start up all of the bots
 for i in $(seq -w 01 ${BOT_COUNT}); do
   service triplea-bot@${i} start
 done
 
-report "bot is at version ${TAG_NAME}"
+
+BOT_RUN_COUNT=$(systemctl list-units triplea-bot@*.service --all --no-legend | grep active | grep -c "running")
+
+report "Running ${BOT_RUN_COUNT} bots at version ${TAG_NAME}"

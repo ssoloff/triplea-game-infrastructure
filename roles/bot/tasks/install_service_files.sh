@@ -24,20 +24,7 @@ function main() {
   installServiceFile ${INSTALL_FOLDER} ${BOT_NAME} ${LOBBY_HOST} ${LOBBY_PORT} ${BOT_START_NUMBER}
   installRunAndUninstallFiles
   createStartStopScripts ${BOT_COUNT}
-}
-
-function disableOldBotFiles() {
-  systemctl reset-failed triplea-bot@*.service # Cleanup crashed, non-existent bots from systemctl list-units
-
-  local botCount=$1
-  # The regex below strips the bot number from the active service names
-  # i.e. triplea-bot@12.service -> 12
-  local installedUnits=$(systemctl list-units triplea-bot@*.service --all --no-legend | grep -Po "(?<=^triplea-bot@)\d+(?=\.service)")
-  for botNumber in installedUnits; do
-    if (( botNumber > botCount )); then
-      systemctl disable triplea-bot@$botNumber --now
-    fi
-  done
+  systemctl daemon-reload
 }
 
 
@@ -101,4 +88,3 @@ function createStartStopScripts() {
 }
 
 main
-systemctl daemon-reload
