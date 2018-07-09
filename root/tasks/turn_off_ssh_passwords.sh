@@ -2,7 +2,7 @@
 
 . /root/infrastructure/common.sh
 
-set -eux
+set -eu
 sshConf="/etc/ssh/sshd_config"
 
 function turnOffPasswords() {
