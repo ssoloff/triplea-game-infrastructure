@@ -20,7 +20,6 @@ BOT_FILE_ROOT="/root/infrastructure/roles/bot/files"
 checkFolder ${BOT_FILE_ROOT}
 
 function main() {
-  disableOldBotFiles ${BOT_COUNT}
   installServiceFile ${INSTALL_FOLDER} ${BOT_NAME} ${LOBBY_HOST} ${LOBBY_PORT} ${BOT_START_NUMBER}
   installRunAndUninstallFiles
   createStartStopScripts ${BOT_COUNT}
