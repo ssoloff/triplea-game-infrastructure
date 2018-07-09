@@ -60,8 +60,15 @@ function installRunAndUninstallFiles() {
   cp ${BOT_FILE_ROOT}/uninstall_bot.sh ${INSTALL_FOLDER}/
 }
 
+
+function openBotPort() {
+  local botPort=${1-}
+  ufw allow ${botPort}
+  ufw reload
+}
+
 function createStartStopScripts() {
-  local botCount=$1
+  local botCount=${1-}
 
   rm -f /home/triplea/start_all /home/triplea/stop_all /home/triplea/restart_all
   rm -f /home/triplea/stop_bot* /home/triplea/start_bot* /home/triplea/restart_bot*
@@ -73,7 +80,7 @@ function createStartStopScripts() {
     local botNumber=${i}
     local botPort="40${botNumber}"
 
-    ufw allow ${botPort}
+    ufw status | grep "$botPort" | grep -q ALLOW || openBotPort "$botPort"
 
     systemctl enable triplea-bot@${botNumber}
     echo "sudo service triplea-bot@${botNumber} restart" > /home/admin/restart_bot_${botNumber}
@@ -81,7 +88,6 @@ function createStartStopScripts() {
     echo "sudo service triplea-bot@${botNumber} start" >> /home/admin/start_all
     echo "sudo service triplea-bot@${botNumber} stop" >> /home/admin/stop_all
   done
-  ufw reload
   chmod +x /home/admin/restart_bot*
   chmod +x /home/admin/start_all /home/admin/stop_all /home/admin/restart_all
 }
