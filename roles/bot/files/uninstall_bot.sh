@@ -23,8 +23,9 @@ if [[ $REPLY =~ ^[Yy]$ || $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
     # Disable all bots that were ever active on this machine
     # The regex below strips the bot number from the active service names
     # i.e. triplea-bot@12.service -> 12
-    local installedUnits=$(systemctl list-units triplea-bot@*.service --all --no-legend | grep -Po "(?<=^triplea-bot@)\d+(?=\.service)")
-    for botNumber in $installedUnits; do
+    for botNumber in \
+        $(systemctl list-units triplea-bot@*.service --all --no-legend \
+             | grep -Po "(?<=^triplea-bot@)\d+(?=\.service)"); do
       systemctl disable triplea-bot@$botNumber
     done
     rm $SERVICE_FILE
