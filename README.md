@@ -160,3 +160,12 @@ crontab -l
 - configuration files are written every time, this way updates will be applied to live server
 - binary files that should never change are written once the first time only.
 
+# Database Backups
+
+Backups are done once a day 
+[automatically](https://github.com/triplea-game/infrastructure/blob/master/roles/lobby_db/tasks/run_daily_db_backup.sh)
+
+As part of backup we run a `pg_dump` and save the file locally to `/home/admin/db_backups`, and we also 
+save a copy of the backup file to the infrastructure server (172.104.27.19)
+
+To allow passwordless copy a ssh key was generated on the lobby server and was added to the [admin authorized keys files](https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys)

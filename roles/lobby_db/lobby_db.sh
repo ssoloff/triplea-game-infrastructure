@@ -26,6 +26,7 @@ checkArg TAG_NAME ${TAG_NAME}
 checkArg DB_PORT ${DB_PORT}
 
 /root/infrastructure/roles/lobby_db/tasks/install_postgres.sh ${DB_PORT}
+/root/infrastructure/roles/lobby_db/tasks/run_daily_db_backup.sh ${TAG_NAME}
 /root/infrastructure/roles/lobby_db/tasks/flyway.sh ${TAG_NAME}
 
 checkServiceIsRunning postgresql
