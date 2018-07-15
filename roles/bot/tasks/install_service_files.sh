@@ -38,7 +38,7 @@ function installServiceFile() {
   cat > /lib/systemd/system/triplea-bot@.service <<EOF
 [Unit]
 Description=TripleA Bot %i
-Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
+Documentation=https://github.com/triplea-game/infrastructure/blob/master/README.md
 
 [Service]
 Environment=

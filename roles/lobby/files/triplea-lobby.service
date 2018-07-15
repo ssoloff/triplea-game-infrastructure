@@ -1,6 +1,6 @@
 [Unit]
 Description=TripleA Lobby Server
-Documentation=https://github.com/triplea-game/lobby/blob/master/README.md
+Documentation=https://github.com/triplea-game/infrastructure/blob/master/README.md
 
 [Service]
 WorkingDirectory=
