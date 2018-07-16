@@ -1,6 +1,37 @@
 # Infrastructure
 
-## Overview 
+## Intent
+
+This project automates and tracks server infrastructure deployment and management. All changes to TripleA infrastructure would be done through this project by modifying the configuration and scripting files. The deployment and updates of servers is then automatic and we have a consistent known state of all servers.
+
+
+## Goals
+ 
+- Document server ops in code, such as how to deploy a new lobby or bot
+- Allow deployments and version upgrades to be automatically executed by updating a single configuration file
+- Provide automatic DB upgrades and lobby deployment based on configuration
+- Provide history of server configuration and changes
+- Save time by automating server deployment and configuration
+- Ensure consistent installations and known configurations
+- install universal tools like papertrail (particularly with the install of universal tools, such as papertrail (log aggregation) and grafana (metrics)
+
+## Integrations and What Does Infrastructure Do?
+
+One thing to note, we run updates frequently which will install software if needed, or do an incremental update, the end state after execution will match the latest checked in configuration.
+
+At a system level, on every host we will run all of the 'root' tasks, https://github.com/triplea-game/infrastructure/tree/master/root/tasks:
+- update system packages
+- ensure security configuration
+- create users and deploy SSH keys
+- add papertrail configuration for log aggregation
+- prometheus integration to send metrics
+
+In addition to that, the major installation is done as the concept of a 'role'. Each host is assigned to a set of roles, such as 'bot', or 'lobby', or 'lobby-database'. To see how hosts are mapped to roles, please check [host_control.sh](https://github.com/triplea-game/infrastructure/blob/master/roles/host_control.sh)
+
+Each role has a 'tasks' folder which are installation executables. Each role also may have a 'files' folder that holds configuration files. For the set of roles, see:  https://github.com/triplea-game/infrastructure/tree/master/roles 
+
+
+## How it Works - Overview 
 
 Text based configuration for servers, we check in changes here, servers download this repo every
  5 minutes and run the update script, which will pick up any changes we check in.
