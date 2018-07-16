@@ -57,17 +57,6 @@ case "$(hostname)" in
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
     ;;
-  bot15_newark_nj)
-    ${BOT} \
-      --bot-name NEWARK_NJ \
-      --bot-port 8000 \
-      --bot-start-number 1 \
-      --bot-count 0 \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
-    ;;
   bot25_ca_usa)
     ${BOT} \
       --bot-name CA_USA \
