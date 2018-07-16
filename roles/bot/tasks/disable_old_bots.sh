@@ -22,7 +22,7 @@ function disableOldBotFiles() {
           | grep -Po "(?<=^triplea-bot@)\d+(?=\.service)"); do
 
     if (( botNumber > botCount )); then
-      systemctl disable triplea-bot@$botNumber --now
+      systemctl disable triplea-bot@$botNumber
     fi
   done
 }

@@ -62,7 +62,7 @@ case "$(hostname)" in
       --bot-name NEWARK_NJ \
       --bot-port 8000 \
       --bot-start-number 1 \
-      --bot-count ${BOT_COUNT} \
+      --bot-count 0 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
