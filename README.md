@@ -56,6 +56,26 @@ At a high level we have the gitter activity feed which is sending a constant yes
 update cronjob kicks in, this is every 5 minutes. Each 
 
 
+# Deployments
+
+Branch merges control deployments, we use 
+[Gitlab branching with environment branches](https://docs.gitlab.com/ee/workflow/gitlab_flow.html#environment-branches-with-gitlab-flow).
+
+Updates are picked up by servers on their next update cycle after merge.
+
+## NonProd (Master)
+
+NonProd deployments are triggered by merges to  [master](https://github.com/triplea-game/infrastructure/tree/master)
+
+
+## Prod Deployment
+Use [Github](https://github.com/triplea-game/infrastructure/branches) 
+to create a PR to merge branch [master](https://github.com/triplea-game/infrastructure/tree/master)
+into [prod](https://github.com/triplea-game/infrastructure/tree/prod)
+
+
+## Notes
+- Server/Bots are *restarted automatically* when a new version is deployed to them. 
 
 # Infrastructure - Adding Servers
 
