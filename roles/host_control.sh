@@ -118,7 +118,7 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 7 \
       --bot-count 14 \
-      --max-memory ${BOT_MEMORY} \
+      --max-memory 230 \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
       --tag-name ${PROD_VERSION}
