@@ -41,10 +41,11 @@ function addPaperTrailToken() {
 function installCrontab() {
   local clean="rm -rf /root/infrastructure/"
   local clone="git clone https://github.com/triplea-game/infrastructure.git /root/infrastructure/"
+  local switchToProd="cd /root/infrastructure; git checkout prod"
   local runCron="/root/infrastructure/update_cron.sh"
 
   sudo apt-get install -y git
-  crontab -l | { cat; echo "*/5 * * * * ${clean}; ${clone}; ${runCron}"; } | crontab -
+  crontab -l | { cat; echo "*/5 * * * * ${clean}; ${clone}; ${switchToProd}; ${runCron}"; } | crontab -
 }
 
 function enforceSshKeysOnly() {
