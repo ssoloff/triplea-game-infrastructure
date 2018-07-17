@@ -1,4 +1,5 @@
-# Infrastructure
+# Infrastructure - Overview
+
 
 ## Intent
 
@@ -49,55 +50,57 @@ update cronjob kicks in, this is every 5 minutes. Each
 
 
 
-# First time setup
+# Infrastructure - Adding Servers
 
-To get a host configured we need:
-1. linode server and a hostname for it
-1. an entry in the infrastructure control file: `host_control.sh`.
-1. one-time install of the update cronjob on the linode
-1. reboot of the server so the hostname is updated
+## How to add a new server
 
-
-## Update host-control
-
-* [host_control.sh](https://github.com/triplea-game/infrastructure/blob/master/roles/host_control.sh)
-
-The script file is a glorified switch statement, each machine executes the file and uses `hostname` to know which
-specific instructions to run. File updates that are merged to master will be available to live production on each
-machines next update cycle (every 5 minutes)
-
-
-## Create Server in Linode
-- Add a new linode, select plan with best price per megabyte of RAM; this tends to be the 1GB nano instances, $5 per month
-- use largest swap disk available (for now.. helps avoid OS reaper process which can kill the bot when 
-system runs low and near out of memory)
-- ubuntu OS 17 or better
-
-'boot' the linode, should be in a running state.
-
-## Prepare install script
-
-Prepare the following script somewhere locally:
+### Prepare the install script in a text editor
+Prepare the following three line script somewhere locally in a text editor for easy copy/paste:
 ```
 MY_HOST=[hostname]
 PAPERTRAIL_TOKEN=[paperTrailToken]
 curl -s "https://raw.githubusercontent.com/triplea-game/infrastructure/master/setup/first_time_setup.sh" | bash -s $MY_HOST $PAPERTRAIL_TOKEN
 ```
-- replace `[hostname]` with the same host name added to `host_control.sh` in the previous step
-- `[paperTrailToken]` is universal and always the same value, it can be grabbed from any running
-machine under infrastructure from the file: `/home/triplea/secrets`
+
+Secret values can be found at `/home/triplea/secrets` on prod servers. The 'hostname' value should 
+match the hostname we assigned in linode. (note: papertrail token is same on all hosts)
+
+### Run through the steps to set up a server and install
+
+- Log in to linode and click 'add a linode':
+![00_add_node](https://user-images.githubusercontent.com/12397753/42787447-66370df0-890f-11e8-9378-bf8934a2d598.png)
+
+- Click 'Deploy an image' link for the new server:
+![01_deploy_image](https://user-images.githubusercontent.com/12397753/42787410-4340ec44-890f-11e8-8a8c-ee989ea5c755.png)
+
+- Select latest Ubuntu LTS and use the root password from the master shared secrets document:
+![02_select_image_and_pass](https://user-images.githubusercontent.com/12397753/42787411-4359ed7a-890f-11e8-8f8c-7b1c8504a6ed.png)
+
+- Next, click boot to fire up the linode
+![03_click_boot](https://user-images.githubusercontent.com/12397753/42787412-4374f35e-890f-11e8-8776-04ad5b25011e.png)
+
+- Next, ssh to the newly started server:
+![04_ssh_to_server](https://user-images.githubusercontent.com/12397753/42788250-4ec01b68-8913-11e8-89a7-7e00f164ed48.png)
+
+- Now paste the commands from the prepare step to run the installation:
+![05_install_contrab](https://user-images.githubusercontent.com/12397753/42787998-e0dc8560-8911-11e8-9c83-afb4355e9c7f.png)
+
+- Next "exit" and reboot the server from linode so that hostname update takes full effect:
+![06_reboot](https://user-images.githubusercontent.com/12397753/42787415-43c0905c-890f-11e8-91ea-62c2f5d12629.png)
 
 
-## Boot server and run install script
+### Finish-up: Update host-control
 
-SSH to the server via command line using `root@IP`, use the password specified during setup. Next copy/paste
-and run the `curl` script previously prepared. Next, log out, and reboot the server from linode so that the hostname 
-update would take effect. You're done : )  
+* [host_control.sh](https://github.com/triplea-game/infrastructure/blob/master/roles/host_control.sh)
 
-When the update job kicks in after reboot SSH keys will be copied and necessary software will be installed and started.
+An update is needed in the file to extend the switch statement which specifies which applications
+are installed on which hosts. The existing pattern can be followed and new entries for the
+new hosts would need to be created.
+
+After all is updated, the update cycle is every 5 minutes, updates should take effect by then.
 
 
-# The 3 Parts to Infrastructure configuration: the update task, system control and host control
+# Design Overview: The 3 Parts to Infrastructure configuration
 
 ## The Update task
 
@@ -153,9 +156,6 @@ copy of logs are in:
 ```
 /root/logs/..../*.log
 ```
-
-***TODO*** make sure we have all logs going to all locations, std error might be missing from one of these log streams
-
 
 # Users and User Policy
 
