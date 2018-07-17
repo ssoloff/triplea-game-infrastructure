@@ -112,40 +112,17 @@ case "$(hostname)" in
       --lobby-host ${PROD_LOBBY_IP} \
       --tag-name ${PROD_VERSION}
     ;;
-  bot70_nj_usa)
+  bot70_nj_4g_usa)
     ${BOT} \
-      --bot-name NJ_USA_01\
+      --bot-name NJ_USA_XL \
       --bot-port 8000 \
       --bot-start-number 7 \
-      --bot-count ${BOT_COUNT} \
+      --bot-count 14 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
       --tag-name ${PROD_VERSION}
     ;;
-  bot75_nj_usa)
-    ${BOT} \
-      --bot-name NJ_USA_02\
-      --bot-port 8000 \
-      --bot-start-number 8 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot80_ca_usa)
-    ${BOT} \
-      --bot-name CA_USA_01\
-      --bot-port 8000 \
-      --bot-start-number 9 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
-    ;;
-
   infra-support)
     ${PROMETHEUS}
     ${GRAFANA}
