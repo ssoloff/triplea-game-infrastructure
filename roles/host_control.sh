@@ -122,6 +122,28 @@ case "$(hostname)" in
       --lobby-host ${PROD_LOBBY_IP} \
       --tag-name ${PROD_VERSION}
     ;;
+  bot80)
+    ${BOT} \
+      --bot-name TX_USA \
+      --bot-port 8000 \
+      --bot-start-number 8 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
+  bot90)
+    ${BOT} \
+      --bot-name TX_USA \
+      --bot-port 9000 \
+      --bot-start-number 9 \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
   infra-support)
     ${PROMETHEUS}
     ${GRAFANA}
