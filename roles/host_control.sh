@@ -116,7 +116,7 @@ case "$(hostname)" in
       --bot-name NJ_USA_XL \
       --bot-port 8000 \
       --bot-start-number 7 \
-      --bot-count 10 \
+      --bot-count 7 \
       --max-memory 296 \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
