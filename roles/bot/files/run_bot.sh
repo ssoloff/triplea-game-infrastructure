@@ -55,4 +55,4 @@ java -server -Xmx${MAX_MEMORY}m -Djava.awt.headless=true -classpath "bin/*" \
     -Ptriplea.lobby.game.supportEmail=Nobody@hotmail123.com \
     -Ptriplea.lobby.game.comments="${COMMENT}" \
     -Ptriplea.lobby.game.reconnection=172800 \
-    -Ptriplea.map.folder=/home/triplea/maps
+    -PmapFolder=/home/triplea/maps
