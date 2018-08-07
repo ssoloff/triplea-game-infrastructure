@@ -27,6 +27,12 @@ botPermissions 01
 botPermissions 02
 botPermissions 03
 botPermissions 04
+botPermissions 05
+botPermissions 06
+botPermissions 07
+botPermissions 08
+botPermissions 09
+botPermissions 10
 
 grep -E -q "^${USER_NAME}.*triplea-lobby" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service triplea-lobby" >> /etc/sudoers
 grep -E -q "^${USER_NAME}.*journalctl" /etc/sudoers || echo "${USER_NAME} ALL=(ALL) NOPASSWD: /usr/sbin/service journalctl" >> /etc/sudoers
