@@ -72,7 +72,7 @@ case "$(hostname)" in
       --bot-name FRANKFURT_DE \
       --bot-port 8000 \
       --bot-start-number 3 \
-      --bot-count ${BOT_COUNT} \
+      --bot-count 7 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
@@ -105,7 +105,7 @@ case "$(hostname)" in
       --bot-name TOKYO_JP \
       --bot-port 8000 \
       --bot-start-number 6 \
-      --bot-count ${BOT_COUNT} \
+      --bot-count 7 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
