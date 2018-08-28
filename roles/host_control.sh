@@ -67,6 +67,17 @@ case "$(hostname)" in
       --lobby-host ${PROD_LOBBY_IP} \
       --tag-name ${PROD_VERSION}
     ;;
+  bot45_atlanta_ga)
+    ${BOT} \
+      --bot-name ATLANTA_GA \
+      --bot-port 8000 \
+      --bot-start-number ${BOT_COUNT} \
+      --bot-count ${BOT_COUNT} \
+      --max-memory ${BOT_MEMORY} \
+      --lobby-port ${PROD_LOBBY_PORT} \
+      --lobby-host ${PROD_LOBBY_IP} \
+      --tag-name ${PROD_VERSION}
+    ;;
   bot55_london_uk)
     ${BOT} \
       --bot-name LONDON_UK \
@@ -85,17 +96,6 @@ case "$(hostname)" in
       --bot-start-number 6 \
       --bot-count ${BOT_COUNT} \
       --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot70_nj_4g_usa)
-    ${BOT} \
-      --bot-name NJ_USA_XL \
-      --bot-port 8000 \
-      --bot-start-number 7 \
-      --bot-count 12 \
-      --max-memory 296 \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
       --tag-name ${PROD_VERSION}
