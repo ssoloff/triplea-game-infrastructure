@@ -24,7 +24,7 @@ PRERELEASE_BOT_MEMORY=128
 
 BOT_COUNT=3
 BOT_MEMORY=168
-PROD_VERSION="1.9.0.0.11775"
+PROD_BOT_VERSION="1.9.0.0.10663"
 PROD_LOBBY_IP="45.79.144.53"
 PROD_LOBBY_PORT="3304"
 PROD_LOBBY_VERSION="1.9.0.0.10663"
@@ -39,7 +39,7 @@ case "$(hostname)" in
        --database-port 5432 \
        --tag-name ${PROD_LOBBY_VERSION}
     ;;
-  prerelease_staging)
+  PreRelease)
     ${LOBBY_DB} \
        --database-port 5432 \
        --tag-name ${LATEST_TAG}
@@ -52,24 +52,10 @@ case "$(hostname)" in
       --bot-port 8000 \
       --bot-start-number 9 \
       --bot-count 1 \
-      --max-memory ${PRERELEASE_BOT_MEMORY} \
-      --lobby-port ${PRERELEASE_LOBBY_PORT} \
-      --lobby-host ${PRERELEASE_LOBBY} \
+      --max-memory 128 \
+      --lobby-port 7000 \
+      --lobby-host 45.79.16.133 \
       --tag-name ${LATEST_TAG}
-    ${HTTP_SERVER} \
-      --tag-name ${LATEST_TAG} \
-      --port 4567
-    ;;
-  bot25_ca_usa)
-    ${BOT} \
-      --bot-name CA_USA \
-      --bot-port 8000 \
-      --bot-start-number 2 \
-      --bot-count ${BOT_COUNT} \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
     ;;
   bot35_frankfurt_de)
     ${BOT} \
@@ -80,29 +66,29 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
+      --tag-name ${PROD_BOT_VERSION}
     ;;
   bot45_atlanta_ga)
     ${BOT} \
       --bot-name ATLANTA_GA \
       --bot-port 8000 \
-      --bot-start-number 4 \
-      --bot-count ${BOT_COUNT} \
+      --bot-start-number 7 \
+      --bot-count 7 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
+      --tag-name ${PROD_BOT_VERSION}
     ;;
   bot55_london_uk)
     ${BOT} \
       --bot-name LONDON_UK \
       --bot-port 8000 \
       --bot-start-number 5 \
-      --bot-count ${BOT_COUNT} \
+      --bot-count 7 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
+      --tag-name ${PROD_BOT_VERSION}
     ;;
   bot65_tokyo_jp)
     ${BOT} \
@@ -113,24 +99,13 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
-    ;;
-  bot70_nj_4g_usa)
-    ${BOT} \
-      --bot-name NJ_USA_XL \
-      --bot-port 8000 \
-      --bot-start-number 7 \
-      --bot-count 7 \
-      --max-memory 296 \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
+      --tag-name ${PROD_BOT_VERSION}
     ;;
   infra-support)
     ${PROMETHEUS}
     ${GRAFANA}
     ;;
   *)
-    report "Latest system updates applied, no host roles to apply"
+    reportError "Unknown host: $(hostname)"
   ;;
 esac
