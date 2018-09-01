@@ -127,6 +127,6 @@ case "$(hostname)" in
     ${GRAFANA}
     ;;
   *)
-    reportError "Unknown host: $(hostname)"
+    report "Latest system updates applied, no host roles to apply"
   ;;
 esac
