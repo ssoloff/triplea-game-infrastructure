@@ -62,6 +62,11 @@ case "$(hostname)" in
        --tag-name ${PROD_LOBBY_VERSION}
     ;;
   PreRelease)
+    ## we'll restart services if installing a new version (preprod only)
+    NEW_VERSION=0
+    if [ ! -d "/home/triplea/lobby/${LATEST_TAG}" ]; then
+      NEW_VERSION=1
+    fi
     ${LOBBY_DB} \
        --tag-name ${LATEST_TAG}
     ${LOBBY} \
@@ -70,6 +75,10 @@ case "$(hostname)" in
     ${PRE_PROD_BOT} \
       --bot-name prerelease \
       --bot-start-number 9;
+    if [ $NEW_VERSION ]; then
+      service triplea-lobby restart
+      service triplea-bot@01 restart
+    fi
     ;;
   bot35_frankfurt_de)
     ${PROD_BOT} \
