@@ -72,7 +72,7 @@ case "$(hostname)" in
     ${BOT} \
       --bot-name ATLANTA_GA \
       --bot-port 8000 \
-      --bot-start-number 7 \
+      --bot-start-number 4 \
       --bot-count 7 \
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
