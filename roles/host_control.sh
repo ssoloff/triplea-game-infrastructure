@@ -27,8 +27,8 @@ PROD_BOT="${BOT} \
     --bot-port 8000 \
     --bot-count 7 \
     --max-memory 168 \
-    --lobby-port ${PROD_LOBBY_PORT} \
     --lobby-host ${PROD_LOBBY_IP} \
+    --lobby-port ${PROD_LOBBY_PORT} \
     --tag-name ${PROD_BOT_VERSION}"
 
 
@@ -51,8 +51,8 @@ PRE_PROD_BOT="${BOT} \
       --bot-port 8000 \
       --bot-count 1 \
       --max-memory 128 \
-      --lobby-port ${PRE_PROD_LOBBY_PORT} \
       --lobby-host ${PRE_PROD_LOBBY_IP} \
+      --lobby-port ${PRE_PROD_LOBBY_PORT} \
       --tag-name ${LATEST_TAG}"
 
 case "$(hostname)" in
@@ -68,8 +68,8 @@ case "$(hostname)" in
        --database-port 5432 \
        --tag-name ${LATEST_TAG}
     ${LOBBY} \
-       --lobby-port ${PRE_PROD_LOBBY_PORT} \
-       --tag-name ${LATEST_TAG}
+       --tag-name ${LATEST_TAG} \
+       --lobby-port ${PRE_PROD_LOBBY_PORT}
     ${PRE_PROD_BOT} \
       --bot-name prerelease \
       --bot-start-number 9;
