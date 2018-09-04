@@ -28,7 +28,7 @@ if [ -z "$CONTROL_FILE" ]; then
 
   echo "Cron executing ${date} ${hostname}" > "${LOG_FILE}"
   chown -R admin:admin "${LOG_FOLDER}"
-  /root/infrastructure/system_update.sh 2>&1 | tee -a "${LOG_FILE}" | /usr/bin/logger
+  /root/infrastructure/system_update.sh 1>> "${LOG_FILE}" | /usr/bin/logger
 else
   report "Control file touch file found found, update progress is either still running or dead"
 fi
