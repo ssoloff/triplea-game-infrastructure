@@ -52,7 +52,7 @@ checkArg MAX_MEMORY ${MAX_MEMORY}
 
 
 function installService() {
-  /root/infrastructure/roles/bot/tasks/install_service_files.sh \
+  /root/infrastructure/roles/bot/tasks/install_service_scripts.sh \
     ${BOT_START_NUMBER} \
     ${BOT_COUNT} \
     ${BOT_NAME} \

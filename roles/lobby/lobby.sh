@@ -44,8 +44,7 @@ if [ ! -f "${INSTALL_SUCCESS_FILE}" ]; then
 fi
 
 /root/infrastructure/roles/lobby/tasks/lobby_config.sh ${DEST_FOLDER} ${PORT}
-/root/infrastructure/roles/lobby/tasks/install_start_and_stop_scripts.sh ${DEST_FOLDER}
-/root/infrastructure/roles/lobby/tasks/install_service_script.sh ${DEST_FOLDER}
+/root/infrastructure/roles/lobby/tasks/install_service_scripts.sh ${DEST_FOLDER}
 
 service triplea-lobby start
 

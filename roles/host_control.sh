@@ -1,4 +1,5 @@
 #!/bin/bash
+HTTP_SERVER=/root/infrastructure/roles/http_server/http_server.sh
 LOBBY_DB=/root/infrastructure/roles/lobby_db/lobby_db.sh
 LOBBY=/root/infrastructure/roles/lobby/lobby.sh
 BOT=/root/infrastructure/roles/bot/bot.sh
@@ -55,6 +56,9 @@ case "$(hostname)" in
       --lobby-port ${PRERELEASE_LOBBY_PORT} \
       --lobby-host ${PRERELEASE_LOBBY} \
       --tag-name ${LATEST_TAG}
+    ${HTTP_SERVER} \
+      --tag-name ${LATEST_TAG} \
+      --port 4567
     ;;
   bot25_ca_usa)
     ${BOT} \
