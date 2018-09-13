@@ -10,7 +10,7 @@ function installLobby() {
 
   echo "$tagName" > ${destFolder}/version
 
-  local installerFile="triplea-${tagName}-server.zip"
+  local installerFile="triplea-lobby-${tagName}.zip"
   wget "https://github.com/triplea-game/triplea/releases/download/${tagName}/${installerFile}"
   unzip -o -d ${destFolder} ${installerFile}
   rm ${installerFile}
