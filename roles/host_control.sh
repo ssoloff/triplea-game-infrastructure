@@ -9,6 +9,7 @@ DB_PORT="5432"
 ## Role installation scripts, each role roughly maps to an application.
 LOBBY_DB="/root/infrastructure/roles/lobby_db/lobby_db.sh --database-port ${DB_PORT}"
 LOBBY="/root/infrastructure/roles/lobby/lobby.sh --database-port ${DB_PORT}"
+HTTP_SERVER=/root/infrastructure/roles/http_server/http_server.sh
 BOT=/root/infrastructure/roles/bot/bot.sh
 PROMETHEUS=/root/infrastructure/roles/support/prometheus/prometheus.sh
 GRAFANA=/root/infrastructure/roles/support/grafana/grafana.sh
@@ -65,7 +66,6 @@ case "$(hostname)" in
     ;;
   PreRelease)
     ${LOBBY_DB} \
-       --database-port 5432 \
        --tag-name ${LATEST_TAG}
     ${LOBBY} \
        --tag-name ${LATEST_TAG} \
@@ -77,13 +77,7 @@ case "$(hostname)" in
   bot35_frankfurt_de)
     ${PROD_BOT} \
       --bot-name FRANKFURT_DE \
-      --bot-port 8000 \
-      --bot-start-number 3 \
-      --bot-count 7 \
-      --max-memory ${BOT_MEMORY} \
-      --lobby-port ${PROD_LOBBY_PORT} \
-      --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_BOT_VERSION}
+      --bot-start-number 3
     ;;
   bot45_atlanta_ga)
     ${PROD_BOT} \
@@ -105,6 +99,6 @@ case "$(hostname)" in
     ${GRAFANA}
     ;;
   *)
-    reportError "Unknown host: $(hostname)"
+    report "Latest system updates applied, no host roles to apply"
   ;;
 esac
