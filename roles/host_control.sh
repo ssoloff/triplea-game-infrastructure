@@ -65,7 +65,7 @@ case "$(hostname)" in
       --max-memory ${BOT_MEMORY} \
       --lobby-port ${PROD_LOBBY_PORT} \
       --lobby-host ${PROD_LOBBY_IP} \
-      --tag-name ${PROD_VERSION}
+      --tag-name 1.9.0.0.12102
     ;;
   bot45_atlanta_ga)
     ${BOT} \
