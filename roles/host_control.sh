@@ -75,7 +75,7 @@ case "$(hostname)" in
     ${PRE_PROD_BOT} \
       --bot-name prerelease \
       --bot-start-number 9;
-    if [ $NEW_VERSION ]; then
+    if [ $NEW_VERSION -eq 1 ]; then
       service triplea-lobby restart
       service triplea-bot@01 restart
     fi
