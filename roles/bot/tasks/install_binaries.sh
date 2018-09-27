@@ -24,7 +24,7 @@ function main() {
 
 function downloadBinaries() {
   local installerFile=$1
-  local url="https://github.com/triplea-game/triplea/releases/download/${TAG_NAME}/triplea-${TAG_NAME}-all_platforms.zip"
+  local url="https://github.com/triplea-game/triplea/releases/download/${TAG_NAME}/triplea-game-headless-${TAG_NAME}.zip"
   curl -L "${url}" > "${installerFile}"
 }
 
