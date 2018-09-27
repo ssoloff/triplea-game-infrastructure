@@ -227,3 +227,11 @@ As part of backup we run a `pg_dump` and save the file locally to `/home/admin/d
 save a copy of the backup file to the infrastructure server (172.104.27.19)
 
 To allow passwordless copy a ssh key was generated on the lobby server and was added to the [admin authorized keys files](https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys)
+
+# How To Update Bot Version
+1. Go to https://github.com/triplea-game/infrastructure/blob/prod/roles/host_control.sh and select pencil icon to edit it
+2. Change the line PROD_VERSION= to the new version number
+3. At the bottom, add description then select "Create a new branch for this commit and start a pull request." then press Commit Changes
+4. Get someone to review and merge PR
+5. Make sure all bots for a given bot server are empty then SSH into the bot server and run ./restart_all
+6. Bots for the given bot server will all leave the lobby, restart on the new version, parse the maps, and rejoin (~10 mins)
