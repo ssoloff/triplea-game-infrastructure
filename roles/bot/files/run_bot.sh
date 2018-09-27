@@ -43,8 +43,8 @@ if [[ -z "${BOT_PORT}" || -z "${BOT_NUMBER}" || -z "{$BOT_NAME}" || -z "${LOBBY_
 fi
 
 cd "$(dirname $0)"
-java -server -Xmx${MAX_MEMORY}m -Djava.awt.headless=true -classpath "bin/*" \
-    games.strategy.engine.framework.headlessGameServer.HeadlessGameServer \
+java -server -Xmx${MAX_MEMORY}m -Djava.awt.headless=true \
+    -jar bin/triplea-game-headless-*-all.jar \
     -Ptriplea.game.host.console=false \
     -Ptriplea.game= \
     -Ptriplea.server=true \
