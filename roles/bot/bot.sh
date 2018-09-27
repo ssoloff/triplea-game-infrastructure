@@ -79,11 +79,6 @@ if [ ! -d "${INSTALL_FOLDER}" ]; then
   installService
   ## we are running as root, so let's make sure we keep perms to the triplea user
   chown -R triplea:triplea /home/triplea
-
-  ## after having done an install, call restart to launch bots to the new version
-  for i in $(seq -w 01 ${BOT_COUNT}); do
-    service triplea-bot@${i} restart
-  done
 else
   ## always update the service configuration scripts, even if we have already installed binaries.
   installService
