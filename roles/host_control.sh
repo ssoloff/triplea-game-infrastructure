@@ -3,11 +3,8 @@
 set -eu
 . /root/infrastructure/common.sh
 
-## Postgres DB port number, so far kept the same on all environments.
-DB_PORT="5432"
-
 ## Role installation scripts, each role roughly maps to an application.
-LOBBY_DB="/root/infrastructure/roles/lobby_db/lobby_db.sh --database-port ${DB_PORT}"
+LOBBY_DB="/root/infrastructure/roles/lobby_db/lobby_db.sh
 LOBBY="/root/infrastructure/roles/lobby/lobby.sh --database-port ${DB_PORT}"
 HTTP_SERVER=/root/infrastructure/roles/http_server/http_server.sh
 BOT=/root/infrastructure/roles/bot/bot.sh
