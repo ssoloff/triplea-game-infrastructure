@@ -8,6 +8,17 @@
 ## How to deploy to prod?
 Simply submit a PR to merge 'master' branch to 'prod'. After merge, the production infrastructures will be updated in a few minutes. Be sure to verify prerelease which has a latest copy of master deployed to it to be sure things look good before deployed.
 
+## Secrets file
+
+Secrets are stored in a hand-written property file: `/home/triplea/secrets`
+
+Typically it contains just the papertrail token, a full example is below:
+```
+papertrail_token=
+db_user=
+db_password=
+```
+
 ## Intent
 
 This project automates and tracks server infrastructure deployment and management. All changes to TripleA infrastructure would be done through this project by modifying the configuration and scripting files. The deployment and updates of servers is then automatic and we have a consistent known state of all servers.
