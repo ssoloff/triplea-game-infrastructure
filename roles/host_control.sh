@@ -4,8 +4,8 @@ set -eu
 . /root/infrastructure/common.sh
 
 ## Role installation scripts, each role roughly maps to an application.
-LOBBY_DB="/root/infrastructure/roles/lobby_db/lobby_db.sh
-LOBBY="/root/infrastructure/roles/lobby/lobby.sh --database-port ${DB_PORT}"
+LOBBY_DB=/root/infrastructure/roles/lobby_db/lobby_db.sh
+LOBBY="/root/infrastructure/roles/lobby/lobby.sh --database-port 5432"
 HTTP_SERVER=/root/infrastructure/roles/http_server/http_server.sh
 BOT=/root/infrastructure/roles/bot/bot.sh
 PROMETHEUS=/root/infrastructure/roles/support/prometheus/prometheus.sh
