@@ -36,9 +36,9 @@ trap '{ rm -f ${TEMP_FILE}; }' EXIT
 
 ## download repo data from github API data so we can scrape latest version information
 curl  -sq 'https://api.github.com/repos/triplea-game/triplea/tags' | \
-    grep "name" > $TEMP_FILE
-LATEST_BUILD=$(cat $TEMP_FILE | sed 's/.*\.//' | sed 's/".*//' | sort -nr | head -1)
-LATEST_TAG=$(grep ${LATEST_BUILD} $TEMP_FILE | sed 's/.* "//' | sed 's/".*$//')
+    grep "name" > "${TEMP_FILE}"
+LATEST_BUILD=$(sed 's/.*\.//' "$TEMP_FILE" | sed 's/".*//' | sort -nr | head -1)
+LATEST_TAG=$(grep "${LATEST_BUILD}" "$TEMP_FILE" | sed 's/.* "//' | sed 's/".*$//')
 
 PRE_PROD_LOBBY_IP="45.79.16.133"
 PRE_PROD_LOBBY_PORT="7000"
