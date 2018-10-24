@@ -6,7 +6,6 @@ set -eu
 
  ## this is a remote server where we will copy a log of the dump file.
  ## In this case if we lose database server we will not also lose the backup dump files.
-BACKUP_SERVER="172.104.27.19"
 DB_NAME="ta_users"
 BACKUP_FOLDER=/home/admin/db_backups/
 mkdir -p "$BACKUP_FOLDER"
@@ -37,12 +36,5 @@ PGPASSWORD="${DB_PASS}" pg_dump -U postgres -h localhost "$DB_NAME" > "$BACKUP_F
  ## ensure admin owns the db dump file so admin user could restore it.
 chown -R admin:admin "$BACKUP_FOLDER"
 
- ## Copy the backup file to a remote server
-ssh -o StrictHostKeyChecking=no ${BACKUP_SERVER} "mkdir -p ${BACKUP_FOLDER}"
-REMOTE_FILE="${BACKUP_FOLDER}/$(hostname)_$BACKUP_FILE_NAME}"
-scp -o StrictHostKeyChecking=no ${BACKUP_FILE} ${BACKUP_SERVER}:${REMOTE_FILE}
-
-
  ## Remove backup files older than 30 days
 find "${BACKUP_FOLDER}" -mtime +30 -type f -delete
-ssh -o StrictHostKeyChecking=no ${BACKUP_SERVER} "find ${BACKUP_FOLDER} -mtime +30 -type f -delete"

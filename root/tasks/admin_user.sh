@@ -12,6 +12,9 @@ cp /root/infrastructure/root/files/admin_user_authorized_keys /home/${USER_NAME}
 chmod 644 /home/${USER_NAME}/.ssh/authorized_keys
 chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/
 
+# add admin to systemd-journal group so they can see all messages from journalctl
+usermod -a -G systemd-journal admin
+
 ## enable sudoer permissions
 
 function botPermissions() {

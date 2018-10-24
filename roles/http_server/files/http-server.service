@@ -1,0 +1,13 @@
+[Unit]
+Description=TripleA Http Server
+Documentation=https://github.com/triplea-game/infrastructure/blob/master/README.md
+
+[Service]
+WorkingDirectory=
+User=triplea
+Group=triplea
+ExecStart=
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,7 +1,23 @@
 # Infrastructure - Overview
 
+## Issue Reporting
+- Report any problems, TODO tasks at the [main triplea issue queue](https://github.com/triplea-game/triplea/issues)
+- Open [infrastructure tasks and problems](https://github.com/triplea-game/triplea/issues)
+
+
 ## How to deploy to prod?
 Simply submit a PR to merge 'master' branch to 'prod'. After merge, the production infrastructures will be updated in a few minutes. Be sure to verify prerelease which has a latest copy of master deployed to it to be sure things look good before deployed.
+
+## Secrets file
+
+Secrets are stored in a hand-written property file: `/home/triplea/secrets`
+
+Typically it contains just the papertrail token, a full example is below:
+```
+papertrail_token=
+db_user=
+db_password=
+```
 
 ## Intent
 
@@ -51,6 +67,26 @@ At a high level we have the gitter activity feed which is sending a constant yes
 update cronjob kicks in, this is every 5 minutes. Each 
 
 
+# Deployments
+
+Branch merges control deployments, we use 
+[Gitlab branching with environment branches](https://docs.gitlab.com/ee/workflow/gitlab_flow.html#environment-branches-with-gitlab-flow).
+
+Updates are picked up by servers on their next update cycle after merge.
+
+## NonProd (Master)
+
+NonProd deployments are triggered by merges to  [master](https://github.com/triplea-game/infrastructure/tree/master)
+
+
+## Prod Deployment
+Use [Github](https://github.com/triplea-game/infrastructure/branches) 
+to create a PR to merge branch [master](https://github.com/triplea-game/infrastructure/tree/master)
+into [prod](https://github.com/triplea-game/infrastructure/tree/prod)
+
+
+## Notes
+- Server/Bots are *restarted automatically* when a new version is deployed to them. 
 
 # Infrastructure - Adding Servers
 
@@ -202,3 +238,11 @@ As part of backup we run a `pg_dump` and save the file locally to `/home/admin/d
 save a copy of the backup file to the infrastructure server (172.104.27.19)
 
 To allow passwordless copy a ssh key was generated on the lobby server and was added to the [admin authorized keys files](https://github.com/triplea-game/infrastructure/blob/master/root/files/admin_user_authorized_keys)
+
+# How To Update Bot Version
+1. Go to https://github.com/triplea-game/infrastructure/blob/prod/roles/host_control.sh and select pencil icon to edit it
+2. Change the line PROD_VERSION= to the new version number
+3. At the bottom, add description then select "Create a new branch for this commit and start a pull request." then press Commit Changes
+4. Get someone to review and merge PR
+5. Make sure all bots for a given bot server are empty then SSH into the bot server and run ./restart_all
+6. Bots for the given bot server will all leave the lobby, restart on the new version, parse the maps, and rejoin (~10 mins)

@@ -45,7 +45,6 @@ fi
 cd "$(dirname $0)"
 java -server -Xmx${MAX_MEMORY}m -Djava.awt.headless=true \
     -jar bin/triplea-game-headless-*-all.jar \
-    -Ptriplea.game.host.console=false \
     -Ptriplea.game= \
     -Ptriplea.server=true \
     -Ptriplea.port=${BOT_PORT} \

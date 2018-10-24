@@ -39,16 +39,12 @@ if [ ! -f "${INSTALL_SUCCESS_FILE}" ]; then
   ufw reload
   mkdir -p ${DEST_FOLDER}
   /root/infrastructure/roles/lobby/tasks/install_lobby_artifacts.sh ${DEST_FOLDER} ${TAG_NAME}
-  report "Lobby updated to ${TAG_NAME}"
+  report "Lobby version ${TAG_NAME} installed"
   touch ${INSTALL_SUCCESS_FILE}
-  service triplea-lobby restart
-else
-  report "Lobby is at version ${TAG_NAME}"
 fi
 
 /root/infrastructure/roles/lobby/tasks/lobby_config.sh ${DEST_FOLDER} ${PORT}
-/root/infrastructure/roles/lobby/tasks/install_start_and_stop_scripts.sh ${DEST_FOLDER}
-/root/infrastructure/roles/lobby/tasks/install_service_script.sh ${DEST_FOLDER}
+/root/infrastructure/roles/lobby/tasks/install_service_scripts.sh ${DEST_FOLDER}
 
 service triplea-lobby start
 
