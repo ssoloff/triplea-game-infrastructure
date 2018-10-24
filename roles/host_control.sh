@@ -16,19 +16,8 @@ GRAFANA=/root/infrastructure/roles/support/grafana/grafana.sh
 
 PROD_LOBBY_IP="45.79.144.53"
 PROD_LOBBY_PORT="3304"
-PROD_LOBBY_VERSION="1.9.0.0.12226"
+PROD_LOBBY_VERSION="1.9.0.0.11996"
 PROD_BOT_VERSION="1.9.0.0.12226"
-
-
-PROD_BOT="${BOT} \
-    --bot-port 8000 \
-    --bot-count 7 \
-    --max-memory 168 \
-    --lobby-host ${PROD_LOBBY_IP} \
-    --lobby-port ${PROD_LOBBY_PORT} \
-    --tag-name ${PROD_BOT_VERSION}"
-
-
 
 TEMP_FILE=$(tempfile)
 # delete temp file on any exit event
@@ -43,6 +32,13 @@ LATEST_TAG=$(grep "${LATEST_BUILD}" "$TEMP_FILE" | sed 's/.* "//' | sed 's/".*$/
 PRE_PROD_LOBBY_IP="45.79.16.133"
 PRE_PROD_LOBBY_PORT="7000"
 
+PROD_BOT="${BOT} \
+    --bot-port 8000 \
+    --bot-count 7 \
+    --max-memory 168 \
+    --lobby-host ${PROD_LOBBY_IP} \
+    --lobby-port ${PROD_LOBBY_PORT} \
+    --tag-name ${PROD_BOT_VERSION}"
 
 PRE_PROD_BOT="${BOT} \
       --bot-port 8000 \
